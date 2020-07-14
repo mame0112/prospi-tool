@@ -28,10 +28,66 @@
 
 <button mat-raised-button (click)="onSubmit()">Submit</button>
 
-<ul>
-    <li *ngFor="let batter of listItem">
-        <button mat-raised-button (click)="selectPlayer(batter)">
-          {{ batter.uuid }} / {{ batter.name }} / {{ batter.meet }} / {{ batter.power }} / {{ batter.speed }}
-        </button>
-    </li>
-</ul>
+<div fxLayout="column">
+    <div fxFlex fxLayout="row" fxLayoutAlign="center start" *ngFor="let batter of listItem">
+        <div fxFlex="10%" fxLayout="column" fxFlexFill fxFlexAlign="center">
+            <div fxFlex fxFlexFill>
+                <button mat-stroked-button (click)="selectPlayer(batter)">選択</button>
+            </div>
+        </div>
+        <div fxFlex="50%" fxLayout="column" class="item_title_basic">
+            <div fxFlex fxLayout="row" fxLayoutAlign="start stretch">
+                <div fxFlex fxLayout="column" fxLayoutAlign="center center">
+                    <div fxFlex fxFlexAlign="center">
+                        {{batter.name}}
+                    </div>
+                </div>
+                <div fxFlex fxLayout="column" fxLayoutAlign="start center">
+                    <div fxFlex>
+                        {{batter.team}}
+                    </div>
+                </div>
+                <div fxFlex fxLayout="column" fxLayoutAlign="start center">
+                    <div fxFlex>
+                        守備
+                    </div>
+                    <div fxFlex>
+                        {{batter.position}}
+                    </div>
+                </div>
+                <div fxFlex fxLayout="column" fxLayoutAlign="start center">
+                    <div fxFlex>
+                        ミート
+                    </div>
+                    <div fxFlex>
+                       {{batter.meet}}
+                    </div>
+                </div>
+                <div fxFlex fxLayout="column" fxLayoutAlign="start center">
+                    <div fxFlex>
+                        パワー    
+                    </div>
+                    <div fxFlex>
+                        {{batter.power}}
+                    </div>
+                </div>
+                <div fxFlex fxLayout="column" fxLayoutAlign="start center">
+                    <div fxFlex>
+                        走力
+                    </div>
+                    <div fxFlex>
+                        {{batter.speed}}
+                    </div>
+                </div>
+                <div fxFlex fxLayout="column" fxLayoutAlign="start center">
+                    <div fxFlex>
+                        スピリッツ    
+                    </div>
+                    <div fxFlex>
+                        {{batter.spirits}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
