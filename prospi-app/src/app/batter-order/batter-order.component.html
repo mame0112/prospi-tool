@@ -1,0 +1,159 @@
+<div fxLayout="column">
+    <div fxFlex fxLayout="row" fxLayoutAlign="center start" *ngFor="let h of holder">
+        <div fxFlex="10%" fxLayout="column" fxFlexFill fxFlexAlign="center">
+            <div fxFlex fxFlexFill>
+                <button mat-stroked-button routerLink="/batter-candidate/{{h.key}}">{{h.label}}</button>
+            </div>
+        </div>
+        <div fxFlex="50%" fxLayout="column" class="item_title_basic">
+            <div fxFlex fxFlexAlign="center" fxLayoutAlign="start stretch">
+                基礎能力
+            </div>
+            <div fxFlex fxLayout="row" fxLayoutAlign="start stretch">
+                <div fxFlex fxLayout="column" fxLayoutAlign="center center">
+                    <div fxFlex fxFlexAlign="center" *ngIf="h.value != null">
+                        {{h.value.name}}
+                    </div>
+                    <div fxFlex fxFlexAlign="center" *ngIf="h.value == null">
+                        -
+                    </div>
+                </div>
+                <div fxFlex fxLayout="column" fxLayoutAlign="start center">
+                    <div fxFlex *ngIf="h.value != null">
+                        {{h.value.team}}
+                    </div>
+                    <div fxFlex *ngIf="h.value == null">
+                        -
+                    </div>
+                </div>
+                <div fxFlex fxLayout="column" fxLayoutAlign="start center">
+                    <div fxFlex>
+                        守備
+                    </div>
+                    <div fxFlex *ngIf="h.value != null">
+                        {{h.value.position}}
+                    </div>
+                    <div fxFlex *ngIf="h.value == null">
+                        -
+                    </div>
+                </div>
+                <div fxFlex fxLayout="column" fxLayoutAlign="start center">
+                    <div fxFlex>
+                        ミート
+                    </div>
+                    <div fxFlex *ngIf="h.value != null && h.value.title != null">
+                       {{calcValue(h.value.meet, h.value.title.meet)}}
+                    </div>
+                    <div fxFlex *ngIf="h.value != null && h.value.title == null">
+                       {{h.value.meet}}
+                    </div>
+                    <div fxFlex *ngIf="h.value == null">
+                        -
+                    </div>
+                </div>
+                <div fxFlex fxLayout="column" fxLayoutAlign="start center">
+                    <div fxFlex>
+                        パワー
+                    </div>
+                    <div fxFlex *ngIf="h.value != null && h.value.title != null">
+                        {{calcValue(h.value.power, h.value.title.power)}}
+                    </div>
+                    <div fxFlex *ngIf="h.value != null && h.value.title == null">
+                        {{h.value.power}}
+                    </div>
+                    <div fxFlex *ngIf="h.value == null">
+                        -
+                    </div>
+                </div>
+                <div fxFlex fxLayout="column" fxLayoutAlign="start center">
+                    <div fxFlex>
+                        走力
+                    </div>
+                    <div fxFlex *ngIf="h.value != null && h.value.title != null">
+                        {{calcValue(h.value.speed, h.value.title.speed)}}
+                    </div>
+                    <div fxFlex *ngIf="h.value != null && h.value.title == null">
+                        {{h.value.speed}}
+                    </div>
+                    <div fxFlex *ngIf="h.value == null">
+                        -
+                    </div>
+                </div>
+                <div fxFlex fxLayout="column" fxLayoutAlign="start center">
+                    <div fxFlex>
+                        スピリッツ    
+                    </div>
+                    <div fxFlex *ngIf="h.value != null && h.value.title != null">
+                        {{calcValue(h.value.spirits, h.value.title.spirits)}}
+                    </div>
+                    <div fxFlex *ngIf="h.value != null && h.value.title == null">
+                        {{h.value.spirits}}
+                    </div>
+                    <div fxFlex *ngIf="h.value == null">
+                        -
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div fxFlex="40%" fxLayout="column" class="item_title_additional">
+            <div fxFlex fxFlexAlign="center" fxLayoutAlign="start stretch">
+                称号
+            </div>
+            <div  fxFlex fxLayout="row">
+                <div fxFlex *ngIf="h.value == null" fxFlexOffset="6px">
+                    <button mat-stroked-button disabled routerLink="/title/{{h.key}}">称号未設定</button>
+                </div>
+                <div fxFlex *ngIf="h.value != null && h.value.title == null" fxFlexOffset="6px">
+                    <button mat-stroked-button routerLink="/title/{{h.key}}">称号を設定</button>
+                </div>
+                <div fxFlex *ngIf="h.value != null && h.value.title != null" fxFlexOffset="6px">
+                    <button mat-stroked-button routerLink="/title/{{h.key}}">{{h.value.title.name}}</button>
+                </div>
+                <div fxFlex fxLayout="column" fxLayoutAlign="start center">
+                    <div fxFlex>
+                        スピリッツ
+                    </div>
+                    <div fxFlex *ngIf="h.value != null && h.value.title != null">
+                        {{h.value.title.spirits}}
+                    </div>
+                    <div fxFlex *ngIf="h.value == null || h.value.title == null">
+                        -
+                    </div>
+                </div>
+                <div fxFlex fxLayout="column" fxLayoutAlign="start center">
+                    <div fxFlex>
+                        球威
+                    </div>
+                    <div fxFlex *ngIf="h.value != null && h.value.title != null">
+                        {{h.value.title.speed}}
+                    </div>
+                    <div fxFlex *ngIf="h.value == null || h.value.title == null">
+                        -
+                    </div>
+                </div>
+                <div fxFlex fxLayout="column" fxLayoutAlign="start center">
+                    <div fxFlex>
+                        制球
+                    </div>
+                    <div fxFlex *ngIf="h.value != null && h.value.title != null">
+                        {{h.value.title.control}}
+                    </div>
+                    <div fxFlex *ngIf="h.value == null || h.value.title == null">
+                        -
+                    </div>
+                </div>
+                <div fxFlex fxLayout="column" fxLayoutAlign="start center">
+                    <div fxFlex>
+                        スタミナ    
+                    </div>
+                    <div fxFlex *ngIf="h.value != null && h.value.title != null">
+                        {{h.value.title.stamina}}
+                    </div>
+                    <div fxFlex *ngIf="h.value == null || h.value.title == null">
+                        -
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

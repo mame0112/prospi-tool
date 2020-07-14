@@ -1,0 +1,17 @@
+.container_pitcher_order {
+    display:block;
+    width:70%;
+    height:100%;
+    padding: 10px;
+    margin:auto;
+}
+
+.item_title_basic {
+    background-color: #cccccc;
+    color: #000000;
+}
+
+.item_title_additional {
+    background-color: #aaaaaa;
+    color: #ffffff;
+}

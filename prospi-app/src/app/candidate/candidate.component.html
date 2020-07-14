@@ -1,0 +1,40 @@
+
+<p>チーム</p>
+<button mat-raised-button (click)="switchAllTeamsStatus()">All</button>
+<mat-checkbox [(ngModel)]="selectedTeam.lions">ライオンズ</mat-checkbox>
+<mat-checkbox [(ngModel)]="selectedTeam.hawks">ソフトバンク</mat-checkbox>
+<mat-checkbox [(ngModel)]="selectedTeam.rakuten">イーグルス</mat-checkbox>
+<mat-checkbox [(ngModel)]="selectedTeam.marins">マリーンズ</mat-checkbox>
+<mat-checkbox [(ngModel)]="selectedTeam.fighters">ファイターズ</mat-checkbox>
+<mat-checkbox [(ngModel)]="selectedTeam.buffalows">バッファローズ</mat-checkbox>
+<mat-checkbox [(ngModel)]="selectedTeam.giants">ジャイアンツ</mat-checkbox>
+<mat-checkbox [(ngModel)]="selectedTeam.baysters">ベイスターズ</mat-checkbox>
+<mat-checkbox [(ngModel)]="selectedTeam.tigners">タイガース</mat-checkbox>
+<mat-checkbox [(ngModel)]="selectedTeam.carp">カープ</mat-checkbox>
+<mat-checkbox [(ngModel)]="selectedTeam.dragons">ドラゴンズ</mat-checkbox>
+<mat-checkbox [(ngModel)]="selectedTeam.swallows">スワローズ</mat-checkbox>
+
+<p>ポジション</p>
+<button mat-raised-button (click)="switchAllPositionStatus()">All</button>
+<mat-checkbox [(ngModel)]="selectedPosition.starter">先</mat-checkbox>
+<mat-checkbox [(ngModel)]="selectedPosition.setupper">継</mat-checkbox>
+<mat-checkbox [(ngModel)]="selectedPosition.closer">抑</mat-checkbox>
+<mat-checkbox [(ngModel)]="selectedPosition.catcher">捕</mat-checkbox>
+<mat-checkbox [(ngModel)]="selectedPosition.first">一</mat-checkbox>
+<mat-checkbox [(ngModel)]="selectedPosition.second">二</mat-checkbox>
+<mat-checkbox [(ngModel)]="selectedPosition.third">三</mat-checkbox>
+<mat-checkbox [(ngModel)]="selectedPosition.short">遊</mat-checkbox>
+<mat-checkbox [(ngModel)]="selectedPosition.left">左</mat-checkbox>
+<mat-checkbox [(ngModel)]="selectedPosition.center">中</mat-checkbox>
+<mat-checkbox [(ngModel)]="selectedPosition.right">右</mat-checkbox>
+
+
+<button mat-raised-button (click)="onSubmit()">Submit</button>
+
+<ul>
+    <li *ngFor="let pitcher of listItem">
+        <button mat-raised-button (click)="selectPlayer(pitcher)">
+          {{ pitcher.uuid }} / {{ pitcher.name }} / {{ pitcher.speed }} / {{ pitcher.control }} / {{ pitcher.stamina }}
+        </button>
+    </li>
+</ul>

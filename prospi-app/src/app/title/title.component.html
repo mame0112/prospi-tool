@@ -1,0 +1,327 @@
+<div class="container_title" fxLayout="column">
+    <div fxFlex fxLayout="column" *ngIf="isPitcher == true">
+        <div fxFlex>
+            投手★★★★
+        </div>
+        <div fxFlex fxLayout="row">
+            <div fxFlex>
+                称号
+            </div>
+            <div fxFlex>
+                球威
+            </div>
+            <div fxFlex>
+                制球
+            </div>
+            <div fxFlex>
+                スタミナ
+            </div>
+            <div fxFlex>
+                スピリッツ
+            </div>
+        </div>
+        <div fxFlex fxLayout="row" *ngFor="let pitcher_title of pitcher_rank4_titles">
+            <div fxFlex>
+                <button mat-stroked-button (click)="setPitcherTitle(pitcher_title.name)">
+                    {{pitcher_title.name}}
+                </button>
+            </div>
+            <div fxFlex>
+                {{pitcher_title.speed}}
+            </div>
+            <div fxFlex>
+                {{pitcher_title.control}}
+            </div>
+            <div fxFlex>
+                {{pitcher_title.stamina}}
+            </div>
+            <div fxFlex>
+                {{pitcher_title.spirits}}
+            </div>
+        </div>
+
+        <div fxFlex>
+            投手★★★
+        </div>
+        <div fxFlex fxLayout="row">
+            <div fxFlex>
+                称号
+            </div>
+            <div fxFlex>
+                球威
+            </div>
+            <div fxFlex>
+                制球
+            </div>
+            <div fxFlex>
+                スタミナ
+            </div>
+            <div fxFlex>
+                スピリッツ
+            </div>
+        </div>
+        <div fxFlex fxLayout="row" *ngFor="let pitcher_title of pitcher_rank3_titles">
+            <div fxFlex>
+                <button mat-stroked-button (click)="setPitcherTitle(pitcher_title.name)">
+                    {{pitcher_title.name}}
+                </button>
+            </div>
+            <div fxFlex>
+                {{pitcher_title.speed}}
+            </div>
+            <div fxFlex>
+                {{pitcher_title.control}}
+            </div>
+            <div fxFlex>
+                {{pitcher_title.stamina}}
+            </div>
+            <div fxFlex>
+                {{pitcher_title.spirits}}
+            </div>
+        </div>
+
+        <div fxFlex>
+            投手★★
+        </div>
+        <div fxFlex fxLayout="row">
+            <div fxFlex>
+                称号
+            </div>
+            <div fxFlex>
+                球威
+            </div>
+            <div fxFlex>
+                制球
+            </div>
+            <div fxFlex>
+                スタミナ
+            </div>
+            <div fxFlex>
+                スピリッツ
+            </div>
+        </div>
+        <div fxFlex fxLayout="row" *ngFor="let pitcher_title of pitcher_rank2_titles">
+            <div fxFlex>
+                <button mat-stroked-button (click)="setPitcherTitle(pitcher_title.name)">
+                    {{pitcher_title.name}}
+                </button>
+            </div>
+            <div fxFlex>
+                {{pitcher_title.speed}}
+            </div>
+            <div fxFlex>
+                {{pitcher_title.control}}
+            </div>
+            <div fxFlex>
+                {{pitcher_title.stamina}}
+            </div>
+            <div fxFlex>
+                {{pitcher_title.spirits}}
+            </div>
+        </div>
+
+        <div fxFlex>
+            投手★
+        </div>
+        <div fxFlex fxLayout="row">
+            <div fxFlex>
+                称号
+            </div>
+            <div fxFlex>
+                球威
+            </div>
+            <div fxFlex>
+                制球
+            </div>
+            <div fxFlex>
+                スタミナ
+            </div>
+            <div fxFlex>
+                スピリッツ
+            </div>
+        </div>
+        <div fxFlex fxLayout="row" *ngFor="let pitcher_title of pitcher_rank1_titles">
+            <div fxFlex>
+                <button mat-stroked-button (click)="setPitcherTitle(pitcher_title.name)">
+                    {{pitcher_title.name}}
+                </button>
+            </div>
+            <div fxFlex>
+                {{pitcher_title.speed}}
+            </div>
+            <div fxFlex>
+                {{pitcher_title.control}}
+            </div>
+            <div fxFlex>
+                {{pitcher_title.stamina}}
+            </div>
+            <div fxFlex>
+                {{pitcher_title.spirits}}
+            </div>
+        </div>
+
+    </div>
+
+    <div fxFlex fxLayout="column" *ngIf="isPitcher == false">
+        <div fxFlex>
+            野手★★★★
+        </div>
+        <div fxFlex fxLayout="row">
+            <div fxFlex>
+                称号
+            </div>
+            <div fxFlex>
+                ミート
+            </div>
+            <div fxFlex>
+                パワー
+            </div>
+            <div fxFlex>
+                総力
+            </div>
+            <div fxFlex>
+                スピリッツ
+            </div>
+        </div>
+        <div fxFlex fxLayout="row" *ngFor="let batter_title of batter_rank4_titles">
+            <div fxFlex>
+                <button mat-stroked-button (click)="setBatterTitle(batter_title.name)">
+                    {{batter_title.name}}
+                </button>
+            </div>
+            <div fxFlex>
+                {{batter_title.meet}}
+            </div>
+            <div fxFlex>
+                {{batter_title.power}}
+            </div>
+            <div fxFlex>
+                {{batter_title.speed}}
+            </div>
+            <div fxFlex>
+                {{batter_title.spirits}}
+            </div>
+        </div>
+
+        <div fxFlex>
+            野手★★★
+        </div>
+        <div fxFlex fxLayout="row">
+            <div fxFlex>
+                称号
+            </div>
+            <div fxFlex>
+                ミート
+            </div>
+            <div fxFlex>
+                パワー
+            </div>
+            <div fxFlex>
+                総力
+            </div>
+            <div fxFlex>
+                スピリッツ
+            </div>
+        </div>
+        <div fxFlex fxLayout="row" *ngFor="let batter_title of batter_rank3_titles">
+            <div fxFlex>
+                <button mat-stroked-button (click)="setBatterTitle(batter_title.name)">
+                    {{batter_title.name}}
+                </button>
+            </div>
+            <div fxFlex>
+                {{batter_title.meet}}
+            </div>
+            <div fxFlex>
+                {{batter_title.power}}
+            </div>
+            <div fxFlex>
+                {{batter_title.speed}}
+            </div>
+            <div fxFlex>
+                {{batter_title.spirits}}
+            </div>
+        </div>
+
+        <div fxFlex>
+            野手★★
+        </div>
+        <div fxFlex fxLayout="row">
+            <div fxFlex>
+                称号
+            </div>
+            <div fxFlex>
+                ミート
+            </div>
+            <div fxFlex>
+                パワー
+            </div>
+            <div fxFlex>
+                総力
+            </div>
+            <div fxFlex>
+                スピリッツ
+            </div>
+        </div>
+        <div fxFlex fxLayout="row" *ngFor="let batter_title of batter_rank2_titles">
+            <div fxFlex>
+                <button mat-stroked-button (click)="setBatterTitle(batter_title.name)">
+                    {{batter_title.name}}
+                </button>
+            </div>
+            <div fxFlex>
+                {{batter_title.meet}}
+            </div>
+            <div fxFlex>
+                {{batter_title.power}}
+            </div>
+            <div fxFlex>
+                {{batter_title.speed}}
+            </div>
+            <div fxFlex>
+                {{batter_title.spirits}}
+            </div>
+        </div>
+
+        <div fxFlex>
+            野手★
+        </div>
+        <div fxFlex fxLayout="row">
+            <div fxFlex>
+                称号
+            </div>
+            <div fxFlex>
+                ミート
+            </div>
+            <div fxFlex>
+                パワー
+            </div>
+            <div fxFlex>
+                総力
+            </div>
+            <div fxFlex>
+                スピリッツ
+            </div>
+        </div>
+        <div fxFlex fxLayout="row" *ngFor="let batter_title of batter_rank1_titles">
+            <div fxFlex>
+                <button mat-stroked-button (click)="setBatterTitle(batter_title.name)">
+                    {{batter_title.name}}
+                </button>
+            </div>
+            <div fxFlex>
+                {{batter_title.meet}}
+            </div>
+            <div fxFlex>
+                {{batter_title.power}}
+            </div>
+            <div fxFlex>
+                {{batter_title.speed}}
+            </div>
+            <div fxFlex>
+                {{batter_title.spirits}}
+            </div>
+        </div>
+    </div>
+    
+</div>
