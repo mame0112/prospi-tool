@@ -1,6 +1,6 @@
 import { Player } from './player';
 
-export class Batter extends Player{
+export class Batter implements Player{
     id: string;
     uuid: string;
     team: string;
@@ -37,7 +37,6 @@ export class Batter extends Player{
         // super(id, uuid, team, position, name, series, 
         // meet, power, speed, majorTotal, catching, throwAccuracy, throwPower, minorTotal, total,
         //  spirits, allPoint, bat, cost, ballistic, catcher, first, second, third, short, left, center, right);
-        super();
 
         this.id = id;
         this.uuid = uuid;

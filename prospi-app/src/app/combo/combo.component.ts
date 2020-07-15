@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { PlayerHolderService } from '../player-holder.service';
+
 @Component({
   selector: 'app-combo',
   templateUrl: './combo.component.html',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComboComponent implements OnInit {
 
-  constructor() { }
+  constructor(private holderService: PlayerHolderService) { }
 
   ngOnInit(): void {
   }

@@ -1,4 +1,4 @@
-<div fxLayout="column" class="container_candiate_pitcher">
+<div fxLayout="column" class="container_candiate_pitcher" [ngClass.lt-md]="'container_candiate_pitcher_small'">
     <div fxFlex>
         <p>チーム</p>
         <button mat-raised-button (click)="switchAllTeamsStatus()">All</button>
