@@ -12,6 +12,8 @@ export class ComboComponent implements OnInit {
   constructor(private holderService: PlayerHolderService) { }
 
   ngOnInit(): void {
+      let player = this.holderService.getAllPositionData();
+      console.log(player);
   }
 
 }
