@@ -270,6 +270,12 @@ export class CandidatePitcherComponent implements OnInit {
             case 'pitcher_bench':
                 this.holderService.storePitcherBench(player);
                 break;
+            case 'pitcher_alt1':
+                this.holderService.storePitcherAlt1(player);
+                break;
+            case 'pitcher_alt2':
+                this.holderService.storePitcherAlt2(player);
+                break;
         }
 
     }

@@ -4,24 +4,43 @@ import { Consts } from './consts';
 
 import { Player } from './player';
 import { Pitcher } from './pitcher';
-import { Batter } from './Batter';
+import { Batter } from './batter';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ComboCalculateService {
 
-    // extreme_team_spirits = function(): boolean{
-    //     console.log();
-    //     return true;
-    // }
+    players: Player[];
 
-    // combos = [
-    //     {'name': 'extreme_team_spirits', 'score': 2300, 'condition': this.extreme_team_spirits}
-    // ];
+    extreme_team_spirits = function(): boolean{
+        console.log('extreme_team_spirits');
+
+        // if(this.is_all_same_team(this.players)){
+
+        // }
+        return true;
+    }
+
+    super_team_spirits = function(): boolean{
+        return true;
+    }
+
+    combos = [
+        {'name': 'extreme_team_spirits', 'score': 2300, 'condition': this.extreme_team_spirits},
+        {'name': 'super_team_spirits', 'score': 1650, 'condition': this.super_team_spirits}
+    ];
 
 
-    constructor() { }
+    constructor() {
+        console.log('ComboCalculateService constructor');
+        this.combos[0].condition();
+
+        // for (let combo in this.combos){
+        //     combo.condition();
+        // }
+
+    }
 
     is_all_same_team(players: Player[]): boolean{
         console.log('is_kiwami_team_spirits');

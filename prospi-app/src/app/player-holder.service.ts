@@ -23,6 +23,9 @@ export class PlayerHolderService {
     closer: Pitcher;
     pitcher_bench: Pitcher;
 
+    pitcher_alt1: Pitcher;
+    pitcher_alt2: Pitcher;
+
     catcher: Batter;
     first: Batter;
     second: Batter;
@@ -37,6 +40,9 @@ export class PlayerHolderService {
     batter_bench3: Batter;
     batter_bench4: Batter;
 
+
+    batter_alt1: Batter;
+    batter_alt2: Batter;
 
     constructor() {
         console.log('PlayerHolderService Constructor');
@@ -79,6 +85,14 @@ export class PlayerHolderService {
         this.pitcher_bench = pitcher;
     }
 
+    storePitcherAlt1(pitcher: Pitcher): void{
+        this.pitcher_alt1 = pitcher;
+    }
+
+    storePitcherAlt2(pitcher: Pitcher): void{
+        this.pitcher_alt2 = pitcher;
+    }
+
     storeCatcher(batter: Batter): void{
         this.catcher = batter;
     }
@@ -118,7 +132,12 @@ export class PlayerHolderService {
     storeBatterBench4(batter: Batter): void{
         this.batter_bench4 = batter;
     }
-
+    storeBatterAlt1(batter: Batter): void{
+        this.batter_alt1 = batter;
+    }
+    storeBatterAlt2(batter: Batter): void{
+        this.batter_alt2 = batter;
+    }
 
     setPitcherTitle(positionName: string, title: any): void {
 
@@ -158,6 +177,12 @@ export class PlayerHolderService {
                 break;
             case 'pitcher_bench':
                 this.pitcher_bench.title = title;
+                break;
+            case 'pitcher_alt1':
+                this.pitcher_alt1.title = title;
+                break;
+            case 'pitcher_alt2':
+                this.pitcher_alt2.title = title;
                 break;
 
         }
@@ -209,6 +234,13 @@ export class PlayerHolderService {
             case 'batter_bench4':
                 this.batter_bench4.title = title;
                 break;
+            case 'batter_alt1':
+                this.batter_alt1.title = title;
+                break;
+            case 'batter_alt2':
+                this.batter_alt2.title = title;
+                break;
+
         }
         
     }
@@ -245,6 +277,12 @@ export class PlayerHolderService {
     }
     getPitcherBench(): Pitcher{
         return this.pitcher_bench;
+    }
+    getPitcherAlt1(): Pitcher{
+        return this.pitcher_alt1;
+    }
+    getPitcherAlt2(): Pitcher{
+        return this.pitcher_alt2;
     }
     getCatcher(): Batter{
         return this.catcher;
@@ -285,6 +323,12 @@ export class PlayerHolderService {
     getBatterBench4(): Batter{
         return this.batter_bench4;
     }
+    getBatterAlt1(): Batter{
+        return this.batter_alt1;
+    }
+    getBatterAlt2(): Batter{
+        return this.batter_alt2;
+    }
 
     getAllPositionData(): Player[]{
         let data: Player[] = [];
@@ -300,6 +344,8 @@ export class PlayerHolderService {
         data.push({key: Consts.SETUPPER4, value:this.setupper4});
         data.push({key: Consts.CLOSESR, value:this.closer});
         data.push({key: Consts.PITCHER_BENCH, value:this.pitcher_bench});
+        data.push({key: Consts.PITCHER_ALT1, value:this.pitcher_alt1});
+        data.push({key: Consts.PITCHER_ALT2, value:this.pitcher_alt2});
         data.push({key: Consts.CATCHER, value:this.catcher});
         data.push({key: Consts.FIRST, value:this.first});
         data.push({key: Consts.SECOND, value:this.second});
@@ -313,6 +359,8 @@ export class PlayerHolderService {
         data.push({key: Consts.BATTER_BENCH2, value:this.batter_bench2});
         data.push({key: Consts.BATTER_BENCH3, value:this.batter_bench3});
         data.push({key: Consts.BATTER_BENCH4, value:this.batter_bench4});
+        data.push({key: Consts.BATTER_ALT1, value:this.batter_alt1});
+        data.push({key: Consts.BATTER_ALT2, value:this.batter_alt2});
 
         return data;
     }

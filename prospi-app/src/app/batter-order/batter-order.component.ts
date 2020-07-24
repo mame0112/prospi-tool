@@ -13,6 +13,7 @@ import { PlayerHolderService } from '../player-holder.service';
 export class BatterOrderComponent implements OnInit {
 
     holder = [];
+    holder_alt = [];
 
     catcher: Batter;
     first: Batter;
@@ -27,6 +28,9 @@ export class BatterOrderComponent implements OnInit {
     batter_bench2: Batter;
     batter_bench3: Batter;
     batter_bench4: Batter;
+
+    batter_alt1: Batter;
+    batter_alt2: Batter;
 
     position: string;
 
@@ -49,6 +53,9 @@ export class BatterOrderComponent implements OnInit {
         this.batter_bench3 = this.holderService.getBatterBench3();
         this.batter_bench4 = this.holderService.getBatterBench4();
 
+        this.batter_alt1 = this.holderService.getBatterAlt1();
+        this.batter_alt2 = this.holderService.getBatterAlt2();
+
         this.holder.push({key:'catcher', label:'キャッチャー', value: this.catcher});
         this.holder.push({key:'first', label:'ファースト', value: this.first});
         this.holder.push({key:'second', label:'セカンド', value: this.second});
@@ -62,6 +69,8 @@ export class BatterOrderComponent implements OnInit {
         this.holder.push({key:'batter_bench2', label:'控え2', value: this.batter_bench2});
         this.holder.push({key:'batter_bench3', label:'控え3', value: this.batter_bench3});
         this.holder.push({key:'batter_bench4', label:'控え4', value: this.batter_bench4});
+        this.holder_alt.push({key:'batter_alt1', label:'候補1', value: this.batter_alt1});
+        this.holder_alt.push({key:'batter_alt2', label:'候補2', value: this.batter_alt2});
 
     }
 

@@ -13,6 +13,7 @@ import { PlayerHolderService } from '../player-holder.service';
 export class PitcherOrderComponent implements OnInit {
 
     holder = [];
+    holder_alt = [];
 
     starter1: Pitcher;
     starter2: Pitcher;
@@ -25,6 +26,8 @@ export class PitcherOrderComponent implements OnInit {
     setupper4: Pitcher;
     closer: Pitcher;
     pitcher_bench: Pitcher;
+    pitcher_alt1: Pitcher;
+    pitcher_alt2: Pitcher;
 
     position: string;
 
@@ -47,7 +50,8 @@ export class PitcherOrderComponent implements OnInit {
         this.setupper4 = this.holderService.getSetupper4();
         this.closer = this.holderService.getCloser();
         this.pitcher_bench = this.holderService.getPitcherBench();
-        console.log(this.starter1);
+        this.pitcher_alt1 = this.holderService.getPitcherAlt1();
+        this.pitcher_alt2 = this.holderService.getPitcherAlt2();
 
         this.holder.push({key:'starter1', label:'先発1', value: this.starter1});
         this.holder.push({key:'starter2', label:'先発2', value: this.starter2});
@@ -60,7 +64,8 @@ export class PitcherOrderComponent implements OnInit {
         this.holder.push({key:'setupper4', label:'中継ぎ4', value: this.setupper4});
         this.holder.push({key:'closer', label:'抑え', value: this.closer});
         this.holder.push({key:'pitcher_bench', label:'控え', value: this.pitcher_bench});
-
+        this.holder_alt.push({key:'pitcher_alt1', label:'候補1', value: this.pitcher_alt1});
+        this.holder_alt.push({key:'pitcher_alt2', label:'候補2', value: this.pitcher_alt2});
 
     }
 

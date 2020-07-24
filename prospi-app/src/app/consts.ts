@@ -23,6 +23,8 @@ export class Consts{
     public static readonly SETUPPER4 = 'setupper4';
     public static readonly CLOSESR = 'closer';
     public static readonly PITCHER_BENCH = 'pitcher_bench';
+    public static readonly PITCHER_ALT1 = 'pitcher_alt1';
+    public static readonly PITCHER_ALT2 = 'pitcher_alt2';
 
     public static readonly CATCHER = 'catcher';
     public static readonly FIRST = 'first';
@@ -37,6 +39,8 @@ export class Consts{
     public static readonly BATTER_BENCH2 = 'batter_bench2';
     public static readonly BATTER_BENCH3 = 'batter_bench3';
     public static readonly BATTER_BENCH4 = 'batter_bench4';
+    public static readonly BATTER_ALT1 = 'batter_alt1';
+    public static readonly BATTER_ALT2 = 'batter_alt2';
 
     public static readonly targetLevel: string[] = ['S', 'A', 'B', 'C', 'D'];
 

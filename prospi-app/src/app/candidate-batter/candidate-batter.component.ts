@@ -292,6 +292,13 @@ export class CandidateBatterComponent implements OnInit {
             case 'batter_bench4':
                 this.holderService.storeBatterBench4(player);
                 break;
+            case 'batter_alt1':
+                this.holderService.storeBatterAlt1(player);
+                break;
+            case 'batter_alt2':
+                this.holderService.storeBatterAlt2(player);
+                break;
+
         }
 
     }
