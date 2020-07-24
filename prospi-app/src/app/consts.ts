@@ -1,4 +1,7 @@
 export class Consts{
+
+    public static readonly USE_COOKIE = true;
+
     public static readonly HAWKS = 'hawks';
     public static readonly LIONS = 'lions';
     public static readonly MARINS = 'marins';

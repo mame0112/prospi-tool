@@ -5,12 +5,13 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 
+import { CookieService } from 'ngx-cookie-service';
+
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 // import { MatListModule } from '@angular/material/list';
 
 import { MatButtonModule } from '@angular/material/button';
-
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
@@ -50,7 +51,7 @@ import { CandidateBatterComponent } from './candidate-batter/candidate-batter.co
     MatButtonModule,
     FlexLayoutModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

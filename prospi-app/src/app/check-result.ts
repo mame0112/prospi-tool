@@ -12,6 +12,10 @@ export class CheckResult {
 
     }
 
+    addComboCheckResult(category: string, combo: any[]): void {
+
+    }
+
     addCombos(category: string, combos: any): void {
         this.result[category] = combos;
     }

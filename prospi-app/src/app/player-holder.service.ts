@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 
+import { CookieService } from 'ngx-cookie-service';
+
 import { Consts } from './consts';
 
 import { Player } from './player';
@@ -44,99 +46,113 @@ export class PlayerHolderService {
     batter_alt1: Batter;
     batter_alt2: Batter;
 
-    constructor() {
+    constructor(private cookieService: CookieService) {
         console.log('PlayerHolderService Constructor');
+    }
+
+    storeCookie(target: string, player: Player): void {
+        this.cookieService.set(target, JSON.stringify(player));
     }
 
 
     storeStarter1(pitcher: Pitcher): void{
         console.log('storeStarter1');
-        this.starter1 = pitcher;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.STARTER1, pitcher):this.starter1 = pitcher;
     }
     storeStarter2(pitcher: Pitcher): void{
-        this.starter2 = pitcher;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.STARTER2, pitcher):this.starter2 = pitcher;
     }
     storeStarter3(pitcher: Pitcher): void{
-        this.starter3 = pitcher;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.STARTER3, pitcher):this.starter3 = pitcher;
     }
     storeStarter4(pitcher: Pitcher): void{
-        this.starter4 = pitcher;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.STARTER4, pitcher):this.starter4 = pitcher;
     }
     storeStarter5(pitcher: Pitcher): void{
-        this.starter5 = pitcher;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.STARTER5, pitcher):this.starter5 = pitcher;
     }
 
     storeSetupper1(pitcher: Pitcher): void{
-        this.setupper1 = pitcher;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.SETUPPER1, pitcher):this.setupper1 = pitcher;
     }
     storeSetupper2(pitcher: Pitcher): void{
-        this.setupper2 = pitcher;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.SETUPPER1, pitcher):this.setupper2 = pitcher;
     }
     storeSetupper3(pitcher: Pitcher): void{
-        this.setupper3 = pitcher;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.SETUPPER1, pitcher):this.setupper3 = pitcher;
     }
     storeSetupper4(pitcher: Pitcher): void{
-        this.setupper4 = pitcher;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.SETUPPER1, pitcher):this.setupper4 = pitcher;
     }
     storeCloser(pitcher: Pitcher): void{
-        this.closer = pitcher;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.CLOSESR, pitcher):this.closer = pitcher;
     }
     storePitcherBench(pitcher: Pitcher): void{
-        this.pitcher_bench = pitcher;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.PITCHER_BENCH, pitcher):this.pitcher_bench = pitcher;
     }
 
     storePitcherAlt1(pitcher: Pitcher): void{
-        this.pitcher_alt1 = pitcher;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.PITCHER_ALT1, pitcher):this.pitcher_alt1 = pitcher;
     }
 
     storePitcherAlt2(pitcher: Pitcher): void{
-        this.pitcher_alt2 = pitcher;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.PITCHER_ALT2, pitcher):this.pitcher_alt2 = pitcher;
     }
 
     storeCatcher(batter: Batter): void{
-        this.catcher = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.CATCHER, batter):this.catcher = batter;
     }
     storeFirst(batter: Batter): void{
-        this.first = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.FIRST, batter):this.first = batter;
     }
     storeSecond(batter: Batter): void{
-        this.second = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.SECOND, batter):this.second = batter;
     }
     storeThird(batter: Batter): void{
-        this.third = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.THIRD, batter):this.third = batter;
     }
     storeShort(batter: Batter): void{
-        this.short = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.SHORT, batter):this.short = batter;
     }
     storeLeft(batter: Batter): void{
-        this.left = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.LEFT, batter):this.left = batter;
     }
     storeCenter(batter: Batter): void{
-        this.center = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.CENTER, batter):this.center = batter;
     }
     storeRight(batter: Batter): void{
-        this.right = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.RIGHT, batter):this.right = batter;
     }
     storeDh(batter: Batter): void{
-        this.dh = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.DH, batter):this.dh = batter;
     }
     storeBatterBench1(batter: Batter): void{
-        this.batter_bench1 = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.BATTER_BENCH1, batter):this.batter_bench1 = batter;
     }
     storeBatterBench2(batter: Batter): void{
-        this.batter_bench2 = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.BATTER_BENCH2, batter):this.batter_bench2 = batter;
     }
     storeBatterBench3(batter: Batter): void{
-        this.batter_bench3 = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.BATTER_BENCH3, batter):this.batter_bench3 = batter;
     }
     storeBatterBench4(batter: Batter): void{
-        this.batter_bench4 = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.BATTER_BENCH4, batter):this.batter_bench4 = batter;
     }
     storeBatterAlt1(batter: Batter): void{
-        this.batter_alt1 = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.BATTER_ALT1, batter):this.batter_alt1 = batter;
     }
     storeBatterAlt2(batter: Batter): void{
-        this.batter_alt2 = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.BATTER_ALT2, batter):this.batter_alt2 = batter;
+    }
+
+    updatePitcherTitle(name: string, pitcher: Pitcher, title: string): void {
+        if(Consts.USE_COOKIE){
+            let p: Pitcher = JSON.parse(this.cookieService.get(name));
+            p.title = title
+            this.cookieService.set(name, JSON.stringify(p));
+        } else {
+            pitcher.title = title;
+        }
     }
 
     setPitcherTitle(positionName: string, title: any): void {
@@ -144,49 +160,58 @@ export class PlayerHolderService {
         console.log('setPitcherTitle');
 
         switch(positionName){
-            case 'starter1':
-                this.starter1.title = title;
-                // this.starter1.setTitle(title);
+            case Consts.STARTER1:
+                this.updatePitcherTitle(Consts.STARTER1, this.starter1, title);
                 break;
-            case 'starter2':
-                this.starter2.title = title;
+            case Consts.STARTER2:
+                this.updatePitcherTitle(Consts.STARTER2, this.starter2, title);
                 break;
-            case 'starter3':
-                this.starter3.title = title;
+            case Consts.STARTER3:
+                this.updatePitcherTitle(Consts.STARTER3, this.starter3, title);
                 break;
-            case 'starter4':
-                this.starter4.title = title;
+            case Consts.STARTER4:
+                this.updatePitcherTitle(Consts.STARTER4, this.starter4, title);
                 break;
-            case 'starter5':
-                this.starter5.title = title;
+            case Consts.STARTER5:
+                this.updatePitcherTitle(Consts.STARTER5, this.starter5, title);
                 break;
-            case 'setupper1':
-                this.setupper1.title = title;
+            case Consts.SETUPPER1:
+                this.updatePitcherTitle(Consts.SETUPPER1, this.setupper1, title);
                 break;
-            case 'setupper2':
-                this.setupper2.title = title;
+            case Consts.SETUPPER2:
+                this.updatePitcherTitle(Consts.SETUPPER2, this.setupper2, title);
                 break;
-            case 'setupper3':
-                this.setupper3.title = title;
+            case Consts.SETUPPER3:
+                this.updatePitcherTitle(Consts.SETUPPER3, this.setupper3, title);
                 break;
-            case 'setupper4':
-                this.setupper4.title = title;
+            case Consts.SETUPPER4:
+                this.updatePitcherTitle(Consts.SETUPPER4, this.setupper4, title);
                 break;
-            case 'closer':
-                this.closer.title = title;
+            case Consts.CLOSESR:
+                this.updatePitcherTitle(Consts.CLOSESR, this.closer, title);
                 break;
-            case 'pitcher_bench':
-                this.pitcher_bench.title = title;
+            case Consts.PITCHER_BENCH:
+                this.updatePitcherTitle(Consts.PITCHER_BENCH, this.pitcher_bench, title);
                 break;
-            case 'pitcher_alt1':
-                this.pitcher_alt1.title = title;
+            case Consts.PITCHER_ALT1:
+                this.updatePitcherTitle(Consts.PITCHER_ALT1, this.pitcher_alt1, title);
                 break;
-            case 'pitcher_alt2':
-                this.pitcher_alt2.title = title;
+            case Consts.PITCHER_ALT2:
+                this.updatePitcherTitle(Consts.PITCHER_ALT2, this.pitcher_alt2, title);
                 break;
 
         }
         
+    }
+
+    updateBatterTitle(name: string, batter: Batter, title: string): void {
+        if(Consts.USE_COOKIE){
+            let b: Batter = JSON.parse(this.cookieService.get(name));
+            b.title = title
+            this.cookieService.set(name, JSON.stringify(b));
+        } else {
+            batter.title = title;
+        }
     }
 
     setBatterTitle(positionName: string, title: any): void {
@@ -194,173 +219,222 @@ export class PlayerHolderService {
         console.log('setBatterTitle');
 
         switch(positionName){
-            case 'catcher':
-                this.catcher.title = title;
-                // this.starter1.setTitle(title);
+            case Consts.CATCHER:
+                this.updateBatterTitle(Consts.CATCHER, this.catcher, title);
                 break;
-            case 'first':
-                this.first.title = title;
+            case Consts.FIRST:
+                this.updateBatterTitle(Consts.FIRST, this.first, title);
                 break;
-            case 'second':
-                this.second.title = title;
+            case Consts.SECOND:
+                this.updateBatterTitle(Consts.SECOND, this.second, title);
                 break;
-            case 'third':
-                this.third.title = title;
+            case Consts.THIRD:
+                this.updateBatterTitle(Consts.THIRD, this.third, title);
                 break;
-            case 'short':
-                this.short.title = title;
+            case Consts.SHORT:
+                this.updateBatterTitle(Consts.SHORT, this.short, title);
                 break;
-            case 'left':
-                this.left.title = title;
+            case Consts.LEFT:
+                this.updateBatterTitle(Consts.LEFT, this.left, title);
                 break;
-            case 'center':
-                this.center.title = title;
+            case Consts.CENTER:
+                this.updateBatterTitle(Consts.CENTER, this.center, title);
                 break;
-            case 'right':
-                this.right.title = title;
+            case Consts.RIGHT:
+                this.updateBatterTitle(Consts.RIGHT, this.right, title);
                 break;
-            case 'dh':
-                this.dh.title = title;
+            case Consts.DH:
+                this.updateBatterTitle(Consts.DH, this.dh, title);
                 break;
-            case 'batter_bench1':
-                this.batter_bench1.title = title;
+            case Consts.BATTER_BENCH1:
+                this.updateBatterTitle(Consts.BATTER_BENCH1, this.batter_bench1, title);
                 break;
-            case 'batter_bench2':
-                this.batter_bench2.title = title;
+            case Consts.BATTER_BENCH2:
+                this.updateBatterTitle(Consts.BATTER_BENCH2, this.batter_bench2, title);
                 break;
-            case 'batter_bench3':
-                this.batter_bench3.title = title;
+            case Consts.BATTER_BENCH3:
+                this.updateBatterTitle(Consts.BATTER_BENCH3, this.batter_bench3, title);
                 break;
-            case 'batter_bench4':
-                this.batter_bench4.title = title;
+            case Consts.BATTER_BENCH4:
+                this.updateBatterTitle(Consts.BATTER_BENCH4, this.batter_bench4, title);
                 break;
-            case 'batter_alt1':
-                this.batter_alt1.title = title;
+            case Consts.BATTER_ALT1:
+                this.updateBatterTitle(Consts.BATTER_ALT1, this.batter_alt1, title);
                 break;
-            case 'batter_alt2':
-                this.batter_alt2.title = title;
+            case Consts.BATTER_ALT2:
+                this.updateBatterTitle(Consts.BATTER_ALT2, this.batter_alt2, title);
                 break;
 
         }
         
     }
 
+    getCookiePitcherData(pisition: string): Pitcher{
+        if (this.cookieService.check(pisition)){
+            return JSON.parse(this.cookieService.get(pisition));
+        }
+        else {
+            return null;
+        }
+    }
+
+    getCookieBatterData(pisition: string): Batter{
+        if (this.cookieService.check(pisition)){
+            return JSON.parse(this.cookieService.get(pisition));
+        }
+        else {
+            return null;
+        }
+    }
+
     getStarter1(): Pitcher{
-        return this.starter1;
+        return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.STARTER1):this.starter1;
     }
     getStarter2(): Pitcher{
-        return this.starter2;
+        return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.STARTER2):this.starter2;
     }
     getStarter3(): Pitcher{
-        return this.starter3;
+        return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.STARTER3):this.starter3;
     }
     getStarter4(): Pitcher{
-        return this.starter4;
+        return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.STARTER4):this.starter4;
     }
     getStarter5(): Pitcher{
-        return this.starter5;
+        return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.STARTER5):this.starter5;
     }
     getSetupper1(): Pitcher{
-        return this.setupper1;
+        return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.SETUPPER1):this.setupper1;
     }
     getSetupper2(): Pitcher{
-        return this.setupper2;
+        return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.SETUPPER2):this.setupper2;
     }
     getSetupper3(): Pitcher{
-        return this.setupper3;
+        return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.SETUPPER3):this.setupper3;
     }
     getSetupper4(): Pitcher{
-        return this.setupper4;
+        return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.SETUPPER4):this.setupper4;
     }
     getCloser(): Pitcher{
-        return this.closer;
+        return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.CLOSESR):this.closer;
     }
     getPitcherBench(): Pitcher{
-        return this.pitcher_bench;
+        return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.PITCHER_BENCH):this.pitcher_bench;
     }
     getPitcherAlt1(): Pitcher{
-        return this.pitcher_alt1;
+        return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.PITCHER_ALT1):this.pitcher_alt1;
     }
     getPitcherAlt2(): Pitcher{
-        return this.pitcher_alt2;
+        return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.PITCHER_ALT2):this.pitcher_alt2;
     }
     getCatcher(): Batter{
-        return this.catcher;
+        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.CATCHER):this.catcher;
     }
     getFirst(): Batter{
-        return this.first;
+        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.FIRST):this.first;
     }
     getSecond(): Batter{
-        return this.second;
+        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.SECOND):this.second;
     }
     getThird(): Batter{
-        return this.third;
+        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.THIRD):this.third;
     }
     getShort(): Batter{
-        return this.short;
+        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.SHORT):this.short;
     }
     getLeft(): Batter{
-        return this.left;
+        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.LEFT):this.left;
     }
     getCenter(): Batter{
-        return this.center;
+        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.CENTER):this.center;
     }
     getRight(): Batter{
-        return this.right;
+        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.RIGHT):this.right;
     }
     getDh(): Batter{
-        return this.dh;
+        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.DH):this.dh;
     }
     getBatterBench1(): Batter{
-        return this.batter_bench1;
+        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.BATTER_BENCH1):this.batter_bench1;
     }
     getBatterBench2(): Batter{
-        return this.batter_bench2;
+        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.BATTER_BENCH2):this.batter_bench2;
     }
     getBatterBench3(): Batter{
-        return this.batter_bench3;
+        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.BATTER_BENCH3):this.batter_bench3;
     }
     getBatterBench4(): Batter{
-        return this.batter_bench4;
+        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.BATTER_BENCH4):this.batter_bench4;
     }
     getBatterAlt1(): Batter{
-        return this.batter_alt1;
+        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.BATTER_ALT1):this.batter_alt1;
     }
     getBatterAlt2(): Batter{
-        return this.batter_alt2;
+        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.BATTER_ALT2):this.batter_alt2;
     }
 
     getAllPositionData(): Player[]{
         let data: Player[] = [];
 
-        data.push({key: Consts.STARTER1, value:this.starter1});
-        data.push({key: Consts.STARTER2, value:this.starter2});
-        data.push({key: Consts.STARTER3, value:this.starter3});
-        data.push({key: Consts.STARTER4, value:this.starter4});
-        data.push({key: Consts.STARTER5, value:this.starter5});
-        data.push({key: Consts.SETUPPER1, value:this.setupper1});
-        data.push({key: Consts.SETUPPER2, value:this.setupper2});
-        data.push({key: Consts.SETUPPER3, value:this.setupper3});
-        data.push({key: Consts.SETUPPER4, value:this.setupper4});
-        data.push({key: Consts.CLOSESR, value:this.closer});
-        data.push({key: Consts.PITCHER_BENCH, value:this.pitcher_bench});
-        data.push({key: Consts.PITCHER_ALT1, value:this.pitcher_alt1});
-        data.push({key: Consts.PITCHER_ALT2, value:this.pitcher_alt2});
-        data.push({key: Consts.CATCHER, value:this.catcher});
-        data.push({key: Consts.FIRST, value:this.first});
-        data.push({key: Consts.SECOND, value:this.second});
-        data.push({key: Consts.THIRD, value:this.third});
-        data.push({key: Consts.SHORT, value:this.short});
-        data.push({key: Consts.LEFT, value:this.left});
-        data.push({key: Consts.CENTER, value:this.center});
-        data.push({key: Consts.RIGHT, value:this.right});
-        data.push({key: Consts.DH, value:this.dh});
-        data.push({key: Consts.BATTER_BENCH1, value:this.batter_bench1});
-        data.push({key: Consts.BATTER_BENCH2, value:this.batter_bench2});
-        data.push({key: Consts.BATTER_BENCH3, value:this.batter_bench3});
-        data.push({key: Consts.BATTER_BENCH4, value:this.batter_bench4});
-        data.push({key: Consts.BATTER_ALT1, value:this.batter_alt1});
-        data.push({key: Consts.BATTER_ALT2, value:this.batter_alt2});
+        if(Consts.USE_COOKIE){
+            data.push({key: Consts.STARTER1, value:this.getCookiePitcherData(Consts.STARTER1)});
+            data.push({key: Consts.STARTER2, value:this.getCookiePitcherData(Consts.STARTER2)});
+            data.push({key: Consts.STARTER3, value:this.getCookiePitcherData(Consts.STARTER3)});
+            data.push({key: Consts.STARTER4, value:this.getCookiePitcherData(Consts.STARTER4)});
+            data.push({key: Consts.STARTER5, value:this.getCookiePitcherData(Consts.STARTER5)});
+            data.push({key: Consts.SETUPPER1, value:this.getCookiePitcherData(Consts.SETUPPER1)});
+            data.push({key: Consts.SETUPPER2, value:this.getCookiePitcherData(Consts.SETUPPER2)});
+            data.push({key: Consts.SETUPPER3, value:this.getCookiePitcherData(Consts.SETUPPER3)});
+            data.push({key: Consts.SETUPPER4, value:this.getCookiePitcherData(Consts.SETUPPER4)});
+            data.push({key: Consts.CLOSESR, value:this.getCookiePitcherData(Consts.CLOSESR)});
+            data.push({key: Consts.PITCHER_BENCH, value:this.getCookiePitcherData(Consts.PITCHER_BENCH)});
+            data.push({key: Consts.PITCHER_ALT1, value:this.getCookiePitcherData(Consts.PITCHER_ALT1)});
+            data.push({key: Consts.PITCHER_ALT2, value:this.getCookiePitcherData(Consts.PITCHER_ALT2)});
+            data.push({key: Consts.CATCHER, value:this.getCookieBatterData(Consts.CATCHER)});
+            data.push({key: Consts.FIRST, value:this.getCookieBatterData(Consts.FIRST)});
+            data.push({key: Consts.SECOND, value:this.getCookieBatterData(Consts.SECOND)});
+            data.push({key: Consts.THIRD, value:this.getCookieBatterData(Consts.THIRD)});
+            data.push({key: Consts.SHORT, value:this.getCookieBatterData(Consts.SHORT)});
+            data.push({key: Consts.LEFT, value:this.getCookieBatterData(Consts.LEFT)});
+            data.push({key: Consts.CENTER, value:this.getCookieBatterData(Consts.CENTER)});
+            data.push({key: Consts.RIGHT, value:this.getCookieBatterData(Consts.RIGHT)});
+            data.push({key: Consts.DH, value:this.getCookieBatterData(Consts.DH)});
+            data.push({key: Consts.BATTER_BENCH1, value:this.getCookieBatterData(Consts.BATTER_BENCH1)});
+            data.push({key: Consts.BATTER_BENCH2, value:this.getCookieBatterData(Consts.BATTER_BENCH2)});
+            data.push({key: Consts.BATTER_BENCH3, value:this.getCookieBatterData(Consts.BATTER_BENCH3)});
+            data.push({key: Consts.BATTER_BENCH4, value:this.getCookieBatterData(Consts.BATTER_BENCH4)});
+            data.push({key: Consts.BATTER_ALT1, value:this.getCookieBatterData(Consts.BATTER_ALT1)});
+            data.push({key: Consts.BATTER_ALT2, value:this.getCookieBatterData(Consts.BATTER_ALT2)});
+        } else {
+            data.push({key: Consts.STARTER1, value:this.starter1});
+            data.push({key: Consts.STARTER2, value:this.starter2});
+            data.push({key: Consts.STARTER3, value:this.starter3});
+            data.push({key: Consts.STARTER4, value:this.starter4});
+            data.push({key: Consts.STARTER5, value:this.starter5});
+            data.push({key: Consts.SETUPPER1, value:this.setupper1});
+            data.push({key: Consts.SETUPPER2, value:this.setupper2});
+            data.push({key: Consts.SETUPPER3, value:this.setupper3});
+            data.push({key: Consts.SETUPPER4, value:this.setupper4});
+            data.push({key: Consts.CLOSESR, value:this.closer});
+            data.push({key: Consts.PITCHER_BENCH, value:this.pitcher_bench});
+            data.push({key: Consts.PITCHER_ALT1, value:this.pitcher_alt1});
+            data.push({key: Consts.PITCHER_ALT2, value:this.pitcher_alt2});
+            data.push({key: Consts.CATCHER, value:this.catcher});
+            data.push({key: Consts.FIRST, value:this.first});
+            data.push({key: Consts.SECOND, value:this.second});
+            data.push({key: Consts.THIRD, value:this.third});
+            data.push({key: Consts.SHORT, value:this.short});
+            data.push({key: Consts.LEFT, value:this.left});
+            data.push({key: Consts.CENTER, value:this.center});
+            data.push({key: Consts.RIGHT, value:this.right});
+            data.push({key: Consts.DH, value:this.dh});
+            data.push({key: Consts.BATTER_BENCH1, value:this.batter_bench1});
+            data.push({key: Consts.BATTER_BENCH2, value:this.batter_bench2});
+            data.push({key: Consts.BATTER_BENCH3, value:this.batter_bench3});
+            data.push({key: Consts.BATTER_BENCH4, value:this.batter_bench4});
+            data.push({key: Consts.BATTER_ALT1, value:this.batter_alt1});
+            data.push({key: Consts.BATTER_ALT2, value:this.batter_alt2});
+        }
+
 
         return data;
     }
@@ -368,19 +442,37 @@ export class PlayerHolderService {
     getAllPitcherData(): Player[]{
         let data: Player[] = [];
 
-        data.push({key: Consts.STARTER1, value:this.starter1});
-        data.push({key: Consts.STARTER2, value:this.starter2});
-        data.push({key: Consts.STARTER3, value:this.starter3});
-        data.push({key: Consts.STARTER4, value:this.starter4});
-        data.push({key: Consts.STARTER5, value:this.starter5});
-        data.push({key: Consts.SETUPPER1, value:this.setupper1});
-        data.push({key: Consts.SETUPPER2, value:this.setupper2});
-        data.push({key: Consts.SETUPPER3, value:this.setupper3});
-        data.push({key: Consts.SETUPPER4, value:this.setupper4});
-        data.push({key: Consts.CLOSESR, value:this.closer});
-        data.push({key: Consts.PITCHER_BENCH, value:this.pitcher_bench});
-        data.push({key: Consts.PITCHER_ALT1, value:this.pitcher_alt1});
-        data.push({key: Consts.PITCHER_ALT2, value:this.pitcher_alt2});
+        if(Consts.USE_COOKIE){
+            data.push({key: Consts.STARTER1, value:this.getCookiePitcherData(Consts.STARTER1)});
+            data.push({key: Consts.STARTER2, value:this.getCookiePitcherData(Consts.STARTER2)});
+            data.push({key: Consts.STARTER3, value:this.getCookiePitcherData(Consts.STARTER3)});
+            data.push({key: Consts.STARTER4, value:this.getCookiePitcherData(Consts.STARTER4)});
+            data.push({key: Consts.STARTER5, value:this.getCookiePitcherData(Consts.STARTER5)});
+            data.push({key: Consts.SETUPPER1, value:this.getCookiePitcherData(Consts.SETUPPER1)});
+            data.push({key: Consts.SETUPPER2, value:this.getCookiePitcherData(Consts.SETUPPER2)});
+            data.push({key: Consts.SETUPPER3, value:this.getCookiePitcherData(Consts.SETUPPER3)});
+            data.push({key: Consts.SETUPPER4, value:this.getCookiePitcherData(Consts.SETUPPER4)});
+            data.push({key: Consts.CLOSESR, value:this.getCookiePitcherData(Consts.CLOSESR)});
+            data.push({key: Consts.PITCHER_BENCH, value:this.getCookiePitcherData(Consts.PITCHER_BENCH)});
+            data.push({key: Consts.PITCHER_ALT1, value:this.getCookiePitcherData(Consts.PITCHER_ALT1)});
+            data.push({key: Consts.PITCHER_ALT2, value:this.getCookiePitcherData(Consts.PITCHER_ALT2)});
+
+        } else {
+            data.push({key: Consts.STARTER1, value:this.starter1});
+            data.push({key: Consts.STARTER2, value:this.starter2});
+            data.push({key: Consts.STARTER3, value:this.starter3});
+            data.push({key: Consts.STARTER4, value:this.starter4});
+            data.push({key: Consts.STARTER5, value:this.starter5});
+            data.push({key: Consts.SETUPPER1, value:this.setupper1});
+            data.push({key: Consts.SETUPPER2, value:this.setupper2});
+            data.push({key: Consts.SETUPPER3, value:this.setupper3});
+            data.push({key: Consts.SETUPPER4, value:this.setupper4});
+            data.push({key: Consts.CLOSESR, value:this.closer});
+            data.push({key: Consts.PITCHER_BENCH, value:this.pitcher_bench});
+            data.push({key: Consts.PITCHER_ALT1, value:this.pitcher_alt1});
+            data.push({key: Consts.PITCHER_ALT2, value:this.pitcher_alt2});
+        }
+
 
         return data;
     }
@@ -388,21 +480,39 @@ export class PlayerHolderService {
     getAllBatterData(): Player[]{
         let data: Player[] = [];
 
-        data.push({key: Consts.CATCHER, value:this.catcher});
-        data.push({key: Consts.FIRST, value:this.first});
-        data.push({key: Consts.SECOND, value:this.second});
-        data.push({key: Consts.THIRD, value:this.third});
-        data.push({key: Consts.SHORT, value:this.short});
-        data.push({key: Consts.LEFT, value:this.left});
-        data.push({key: Consts.CENTER, value:this.center});
-        data.push({key: Consts.RIGHT, value:this.right});
-        data.push({key: Consts.DH, value:this.dh});
-        data.push({key: Consts.BATTER_BENCH1, value:this.batter_bench1});
-        data.push({key: Consts.BATTER_BENCH2, value:this.batter_bench2});
-        data.push({key: Consts.BATTER_BENCH3, value:this.batter_bench3});
-        data.push({key: Consts.BATTER_BENCH4, value:this.batter_bench4});
-        data.push({key: Consts.BATTER_ALT1, value:this.batter_alt1});
-        data.push({key: Consts.BATTER_ALT2, value:this.batter_alt2});
+        if(Consts.USE_COOKIE){
+            data.push({key: Consts.CATCHER, value:this.getCookieBatterData(Consts.CATCHER)});
+            data.push({key: Consts.FIRST, value:this.getCookieBatterData(Consts.FIRST)});
+            data.push({key: Consts.SECOND, value:this.getCookieBatterData(Consts.SECOND)});
+            data.push({key: Consts.THIRD, value:this.getCookieBatterData(Consts.THIRD)});
+            data.push({key: Consts.SHORT, value:this.getCookieBatterData(Consts.SHORT)});
+            data.push({key: Consts.LEFT, value:this.getCookieBatterData(Consts.LEFT)});
+            data.push({key: Consts.CENTER, value:this.getCookieBatterData(Consts.CENTER)});
+            data.push({key: Consts.RIGHT, value:this.getCookieBatterData(Consts.RIGHT)});
+            data.push({key: Consts.DH, value:this.getCookieBatterData(Consts.DH)});
+            data.push({key: Consts.BATTER_BENCH1, value:this.getCookieBatterData(Consts.BATTER_BENCH1)});
+            data.push({key: Consts.BATTER_BENCH2, value:this.getCookieBatterData(Consts.BATTER_BENCH2)});
+            data.push({key: Consts.BATTER_BENCH3, value:this.getCookieBatterData(Consts.BATTER_BENCH3)});
+            data.push({key: Consts.BATTER_BENCH4, value:this.getCookieBatterData(Consts.BATTER_BENCH4)});
+            data.push({key: Consts.BATTER_ALT1, value:this.getCookieBatterData(Consts.BATTER_ALT1)});
+            data.push({key: Consts.BATTER_ALT2, value:this.getCookieBatterData(Consts.BATTER_ALT2)});
+        } else {
+            data.push({key: Consts.CATCHER, value:this.catcher});
+            data.push({key: Consts.FIRST, value:this.first});
+            data.push({key: Consts.SECOND, value:this.second});
+            data.push({key: Consts.THIRD, value:this.third});
+            data.push({key: Consts.SHORT, value:this.short});
+            data.push({key: Consts.LEFT, value:this.left});
+            data.push({key: Consts.CENTER, value:this.center});
+            data.push({key: Consts.RIGHT, value:this.right});
+            data.push({key: Consts.DH, value:this.dh});
+            data.push({key: Consts.BATTER_BENCH1, value:this.batter_bench1});
+            data.push({key: Consts.BATTER_BENCH2, value:this.batter_bench2});
+            data.push({key: Consts.BATTER_BENCH3, value:this.batter_bench3});
+            data.push({key: Consts.BATTER_BENCH4, value:this.batter_bench4});
+            data.push({key: Consts.BATTER_ALT1, value:this.batter_alt1});
+            data.push({key: Consts.BATTER_ALT2, value:this.batter_alt2});
+        }
 
         return data;
     }
