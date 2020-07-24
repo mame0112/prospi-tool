@@ -365,4 +365,46 @@ export class PlayerHolderService {
         return data;
     }
 
+    getAllPitcherData(): Player[]{
+        let data: Player[] = [];
+
+        data.push({key: Consts.STARTER1, value:this.starter1});
+        data.push({key: Consts.STARTER2, value:this.starter2});
+        data.push({key: Consts.STARTER3, value:this.starter3});
+        data.push({key: Consts.STARTER4, value:this.starter4});
+        data.push({key: Consts.STARTER5, value:this.starter5});
+        data.push({key: Consts.SETUPPER1, value:this.setupper1});
+        data.push({key: Consts.SETUPPER2, value:this.setupper2});
+        data.push({key: Consts.SETUPPER3, value:this.setupper3});
+        data.push({key: Consts.SETUPPER4, value:this.setupper4});
+        data.push({key: Consts.CLOSESR, value:this.closer});
+        data.push({key: Consts.PITCHER_BENCH, value:this.pitcher_bench});
+        data.push({key: Consts.PITCHER_ALT1, value:this.pitcher_alt1});
+        data.push({key: Consts.PITCHER_ALT2, value:this.pitcher_alt2});
+
+        return data;
+    }
+
+    getAllBatterData(): Player[]{
+        let data: Player[] = [];
+
+        data.push({key: Consts.CATCHER, value:this.catcher});
+        data.push({key: Consts.FIRST, value:this.first});
+        data.push({key: Consts.SECOND, value:this.second});
+        data.push({key: Consts.THIRD, value:this.third});
+        data.push({key: Consts.SHORT, value:this.short});
+        data.push({key: Consts.LEFT, value:this.left});
+        data.push({key: Consts.CENTER, value:this.center});
+        data.push({key: Consts.RIGHT, value:this.right});
+        data.push({key: Consts.DH, value:this.dh});
+        data.push({key: Consts.BATTER_BENCH1, value:this.batter_bench1});
+        data.push({key: Consts.BATTER_BENCH2, value:this.batter_bench2});
+        data.push({key: Consts.BATTER_BENCH3, value:this.batter_bench3});
+        data.push({key: Consts.BATTER_BENCH4, value:this.batter_bench4});
+        data.push({key: Consts.BATTER_ALT1, value:this.batter_alt1});
+        data.push({key: Consts.BATTER_ALT2, value:this.batter_alt2});
+
+        return data;
+    }
+
 }
