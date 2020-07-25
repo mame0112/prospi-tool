@@ -52,97 +52,100 @@ export class PlayerHolderService {
 
     storeCookie(target: string, player: Player): void {
         this.cookieService.set(target, JSON.stringify(player));
+        console.log('storeCookie');
+        // console.log(JSON.stringify(player));
+        // console.log(JSON.stringify(player).length);
     }
 
 
     storeStarter1(pitcher: Pitcher): void{
         console.log('storeStarter1');
-        Consts.USE_COOKIE ? this.storeCookie(Consts.STARTER1, pitcher):this.starter1 = pitcher;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.STARTER1, pitcher.uuid):this.starter1 = pitcher;
     }
     storeStarter2(pitcher: Pitcher): void{
-        Consts.USE_COOKIE ? this.storeCookie(Consts.STARTER2, pitcher):this.starter2 = pitcher;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.STARTER2, pitcher.uuid):this.starter2 = pitcher;
     }
     storeStarter3(pitcher: Pitcher): void{
-        Consts.USE_COOKIE ? this.storeCookie(Consts.STARTER3, pitcher):this.starter3 = pitcher;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.STARTER3, pitcher.uuid):this.starter3 = pitcher;
     }
     storeStarter4(pitcher: Pitcher): void{
-        Consts.USE_COOKIE ? this.storeCookie(Consts.STARTER4, pitcher):this.starter4 = pitcher;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.STARTER4, pitcher.uuid):this.starter4 = pitcher;
     }
     storeStarter5(pitcher: Pitcher): void{
-        Consts.USE_COOKIE ? this.storeCookie(Consts.STARTER5, pitcher):this.starter5 = pitcher;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.STARTER5, pitcher.uuid):this.starter5 = pitcher;
     }
 
     storeSetupper1(pitcher: Pitcher): void{
-        Consts.USE_COOKIE ? this.storeCookie(Consts.SETUPPER1, pitcher):this.setupper1 = pitcher;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.SETUPPER1, pitcher.uuid):this.setupper1 = pitcher;
     }
     storeSetupper2(pitcher: Pitcher): void{
-        Consts.USE_COOKIE ? this.storeCookie(Consts.SETUPPER1, pitcher):this.setupper2 = pitcher;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.SETUPPER2, pitcher.uuid):this.setupper2 = pitcher;
     }
     storeSetupper3(pitcher: Pitcher): void{
-        Consts.USE_COOKIE ? this.storeCookie(Consts.SETUPPER1, pitcher):this.setupper3 = pitcher;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.SETUPPER3, pitcher.uuid):this.setupper3 = pitcher;
     }
     storeSetupper4(pitcher: Pitcher): void{
-        Consts.USE_COOKIE ? this.storeCookie(Consts.SETUPPER1, pitcher):this.setupper4 = pitcher;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.SETUPPER4, pitcher.uuid):this.setupper4 = pitcher;
     }
     storeCloser(pitcher: Pitcher): void{
-        Consts.USE_COOKIE ? this.storeCookie(Consts.CLOSESR, pitcher):this.closer = pitcher;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.CLOSESR, pitcher.uuid):this.closer = pitcher;
     }
     storePitcherBench(pitcher: Pitcher): void{
-        Consts.USE_COOKIE ? this.storeCookie(Consts.PITCHER_BENCH, pitcher):this.pitcher_bench = pitcher;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.PITCHER_BENCH, pitcher.uuid):this.pitcher_bench = pitcher;
     }
 
     storePitcherAlt1(pitcher: Pitcher): void{
-        Consts.USE_COOKIE ? this.storeCookie(Consts.PITCHER_ALT1, pitcher):this.pitcher_alt1 = pitcher;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.PITCHER_ALT1, pitcher.uuid):this.pitcher_alt1 = pitcher;
     }
 
     storePitcherAlt2(pitcher: Pitcher): void{
-        Consts.USE_COOKIE ? this.storeCookie(Consts.PITCHER_ALT2, pitcher):this.pitcher_alt2 = pitcher;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.PITCHER_ALT2, pitcher.uuid):this.pitcher_alt2 = pitcher;
     }
 
     storeCatcher(batter: Batter): void{
-        Consts.USE_COOKIE ? this.storeCookie(Consts.CATCHER, batter):this.catcher = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.CATCHER, batter.uuid):this.catcher = batter;
     }
     storeFirst(batter: Batter): void{
-        Consts.USE_COOKIE ? this.storeCookie(Consts.FIRST, batter):this.first = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.FIRST, batter.uuid):this.first = batter;
     }
     storeSecond(batter: Batter): void{
-        Consts.USE_COOKIE ? this.storeCookie(Consts.SECOND, batter):this.second = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.SECOND, batter.uuid):this.second = batter;
     }
     storeThird(batter: Batter): void{
-        Consts.USE_COOKIE ? this.storeCookie(Consts.THIRD, batter):this.third = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.THIRD, batter.uuid):this.third = batter;
     }
     storeShort(batter: Batter): void{
-        Consts.USE_COOKIE ? this.storeCookie(Consts.SHORT, batter):this.short = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.SHORT, batter.uuid):this.short = batter;
     }
     storeLeft(batter: Batter): void{
-        Consts.USE_COOKIE ? this.storeCookie(Consts.LEFT, batter):this.left = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.LEFT, batter.uuid):this.left = batter;
     }
     storeCenter(batter: Batter): void{
-        Consts.USE_COOKIE ? this.storeCookie(Consts.CENTER, batter):this.center = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.CENTER, batter.uuid):this.center = batter;
     }
     storeRight(batter: Batter): void{
-        Consts.USE_COOKIE ? this.storeCookie(Consts.RIGHT, batter):this.right = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.RIGHT, batter.uuid):this.right = batter;
     }
     storeDh(batter: Batter): void{
-        Consts.USE_COOKIE ? this.storeCookie(Consts.DH, batter):this.dh = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.DH, batter.uuid):this.dh = batter;
     }
     storeBatterBench1(batter: Batter): void{
-        Consts.USE_COOKIE ? this.storeCookie(Consts.BATTER_BENCH1, batter):this.batter_bench1 = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.BATTER_BENCH1, batter.uuid):this.batter_bench1 = batter;
     }
     storeBatterBench2(batter: Batter): void{
-        Consts.USE_COOKIE ? this.storeCookie(Consts.BATTER_BENCH2, batter):this.batter_bench2 = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.BATTER_BENCH2, batter.uuid):this.batter_bench2 = batter;
     }
     storeBatterBench3(batter: Batter): void{
-        Consts.USE_COOKIE ? this.storeCookie(Consts.BATTER_BENCH3, batter):this.batter_bench3 = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.BATTER_BENCH3, batter.uuid):this.batter_bench3 = batter;
     }
     storeBatterBench4(batter: Batter): void{
-        Consts.USE_COOKIE ? this.storeCookie(Consts.BATTER_BENCH4, batter):this.batter_bench4 = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.BATTER_BENCH4, batter.uuid):this.batter_bench4 = batter;
     }
     storeBatterAlt1(batter: Batter): void{
-        Consts.USE_COOKIE ? this.storeCookie(Consts.BATTER_ALT1, batter):this.batter_alt1 = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.BATTER_ALT1, batter.uuid):this.batter_alt1 = batter;
     }
     storeBatterAlt2(batter: Batter): void{
-        Consts.USE_COOKIE ? this.storeCookie(Consts.BATTER_ALT2, batter):this.batter_alt2 = batter;
+        Consts.USE_COOKIE ? this.storeCookie(Consts.BATTER_ALT2, batter.uuid):this.batter_alt2 = batter;
     }
 
     updatePitcherTitle(name: string, pitcher: Pitcher, title: string): void {

@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Router, ActivatedRoute } from '@angular/router';
+import { catchError, map, tap } from 'rxjs/operators';
 
-import { HttpClient } from "@angular/common/http";
+/*import { HttpClient } from "@angular/common/http";*/
 import { Consts } from '../consts';
 
 import { PlayerHolderService } from '../player-holder.service';
+import { PlayerListLoaderService } from '../player-list-loader.service';
 
 import { Util } from '../util/util';
 
@@ -19,10 +21,10 @@ import { Pitcher } from '../pitcher';
 })
 export class CandidatePitcherComponent implements OnInit {
 
-    constructor(private http: HttpClient,
-        private holderService: PlayerHolderService,
+    constructor(private holderService: PlayerHolderService,
         private router: Router,
-        private activatedRoute: ActivatedRoute) { }
+        private activatedRoute: ActivatedRoute,
+        private loaderService: PlayerListLoaderService) { }
 
     targetLevel = Consts.targetLevel;
     targetTeam = Consts.targetTeam;
@@ -46,76 +48,14 @@ export class CandidatePitcherComponent implements OnInit {
         this.targetPosition = this.activatedRoute.snapshot.paramMap.get('position');
         console.log(this.targetPosition);
 
-        this.http.get('assets/pitcher.csv', {responseType: 'text'})
-        .subscribe(
-            data => {
-                let csvToRowArray = data.split("\n");
-                for (let index = 1; index < csvToRowArray.length - 1; index++) {
-                  let row = csvToRowArray[index].split(",");
-                  // console.log(row[0]);
-                  this.pitcherArray.push(new Pitcher(this.createId(row[0]), this.createUuid(row[0], row[2], row[3]), row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18], row[19], row[20]));
-                }
-              // this.targetPithers = this.pitcherArray
-              // this.targetPithers = JSON.parse(JSON.stringify(this.pitcherArray));
-              this.listItem = JSON.parse(JSON.stringify(this.pitcherArray));
-            },
-            error => {
-                console.log(error);
-            }
-        );
-
+        this.loaderService.loadPitcherCandidateList().pipe(
+            // tap(params => console.log(params)))
+            tap())
+        .subscribe(result => {
+            this.pitcherArray = result;
+            this.listItem = JSON.parse(JSON.stringify(this.pitcherArray));
+        });
     }
-
-    createId(team: string): string{
-        let id = null;
-
-        switch(team){
-            case '西':
-                id = Consts.LIONS;
-                break;
-            case 'ソ':
-                id = Consts.HAWKS;
-                break;
-            case 'ロ':
-                id = Consts.MARINS;
-                break;
-            case 'オ':
-                id = Consts.BUFFALOWS;
-                break;
-            case '楽':
-                id = Consts.RAKUTEN;
-                break;
-            case '日':
-                id = Consts.FIGHTERS;
-                break;
-            case '巨':
-                id = Consts.GIANTS;
-                break;
-            case 'De':
-                id = Consts.BAYSTERS;
-                break;
-            case '神':
-                id = Consts.TIGERS;
-                break;
-            case '広':
-                id = Consts.CARP;
-                break;
-            case '中':
-                id = Consts.DRAGONS;
-                break;
-            case 'ヤ':
-                id = Consts.SWALLOWS;
-                break;
-
-        }
-
-        return id;
-    }
-
-    createUuid(team: string, name: string, series: string): string{
-        return btoa(unescape(encodeURIComponent(team+name+series)));
-    }
-
 
     onSubmit(): void {
         this.chooseSelectedTeamPlayers();

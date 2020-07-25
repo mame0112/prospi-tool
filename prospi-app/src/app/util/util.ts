@@ -13,6 +13,53 @@ export class Util {
     ngOnInit(): void {
     }
 
+    static createId(team: string): string{
+        let id = null;
+
+        switch(team){
+            case '西':
+                id = Consts.LIONS;
+                break;
+            case 'ソ':
+                id = Consts.HAWKS;
+                break;
+            case 'ロ':
+                id = Consts.MARINS;
+                break;
+            case 'オ':
+                id = Consts.BUFFALOWS;
+                break;
+            case '楽':
+                id = Consts.RAKUTEN;
+                break;
+            case '日':
+                id = Consts.FIGHTERS;
+                break;
+            case '巨':
+                id = Consts.GIANTS;
+                break;
+            case 'De':
+                id = Consts.BAYSTERS;
+                break;
+            case '神':
+                id = Consts.TIGERS;
+                break;
+            case '広':
+                id = Consts.CARP;
+                break;
+            case '中':
+                id = Consts.DRAGONS;
+                break;
+            case 'ヤ':
+                id = Consts.SWALLOWS;
+                break;
+
+        }
+
+        return id;
+    }
+
+
     isPitcher(targetPosition: string): boolean {
         if (targetPosition != null){
             if (targetPosition == 'starter1' || targetPosition == 'starter2' || targetPosition == 'starter3' || targetPosition == 'starter4' || targetPosition == 'starter5' || targetPosition == 'setupper1' || targetPosition == 'setupper2' || targetPosition == 'setupper3' || targetPosition == 'setupper4' || targetPosition == 'closer' || targetPosition == 'pitcher_bench'){

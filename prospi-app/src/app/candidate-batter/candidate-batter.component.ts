@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Router, ActivatedRoute } from '@angular/router';
+import { catchError, map, tap } from 'rxjs/operators';
 
 import { HttpClient } from "@angular/common/http";
 import { Consts } from '../consts';
 
 import { PlayerHolderService } from '../player-holder.service';
+import { PlayerListLoaderService } from '../player-list-loader.service';
 
 import { Util } from '../util/util';
 
@@ -23,7 +25,8 @@ export class CandidateBatterComponent implements OnInit {
     constructor(private http: HttpClient,
         private holderService: PlayerHolderService,
         private router: Router,
-        private activatedRoute: ActivatedRoute) { }
+        private activatedRoute: ActivatedRoute,
+        private loaderService: PlayerListLoaderService) { }
 
 
     targetLevel = Consts.targetLevel;
@@ -47,73 +50,34 @@ export class CandidateBatterComponent implements OnInit {
 
         this.targetPosition = this.activatedRoute.snapshot.paramMap.get('position');
         console.log(this.targetPosition);
+        this.loaderService.loadBatterCandidateList().pipe(
+            // tap(param => console.log(param)))
+            tap())
+            .subscribe(result => {
+                this.batterArray = result;
+                this.listItem = JSON.parse(JSON.stringify(this.batterArray));
+            });
 
+        // this.http.get('assets/batter.csv', {responseType: 'text'})
+        // .subscribe(
+        //     data => {
+        //         let csvToRowArray = data.split("\n");
+        //         for (let index = 1; index < csvToRowArray.length - 1; index++) {
+        //           let row = csvToRowArray[index].split(",");
+        //           console.log(row);
+        //           this.batterArray.push(new Batter(Util.createId(row[0]), this.createUuid(row[0], row[2], row[3]), row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18], row[19], row[20], row[21], row[22], row[23], row[24], row[25]));
+        //         }
+        //       this.listItem = JSON.parse(JSON.stringify(this.batterArray));
 
-        this.http.get('assets/batter.csv', {responseType: 'text'})
-        .subscribe(
-            data => {
-                let csvToRowArray = data.split("\n");
-                for (let index = 1; index < csvToRowArray.length - 1; index++) {
-                  let row = csvToRowArray[index].split(",");
-                  console.log(row);
-                  this.batterArray.push(new Batter(this.createId(row[0]), this.createUuid(row[0], row[2], row[3]), row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18], row[19], row[20], row[21], row[22], row[23], row[24], row[25]));
-                }
-              this.listItem = JSON.parse(JSON.stringify(this.batterArray));
-
-            },
-            error => {
-                console.log(error);
-            }
-        );
-    }
-
-    createId(team: string): string{
-        let id = null;
-
-        switch(team){
-            case '西':
-                id = Consts.LIONS;
-                break;
-            case 'ソ':
-                id = Consts.HAWKS;
-                break;
-            case 'ロ':
-                id = Consts.MARINS;
-                break;
-            case 'オ':
-                id = Consts.BUFFALOWS;
-                break;
-            case '楽':
-                id = Consts.RAKUTEN;
-                break;
-            case '日':
-                id = Consts.FIGHTERS;
-                break;
-            case '巨':
-                id = Consts.GIANTS;
-                break;
-            case 'De':
-                id = Consts.BAYSTERS;
-                break;
-            case '神':
-                id = Consts.TIGERS;
-                break;
-            case '広':
-                id = Consts.CARP;
-                break;
-            case '中':
-                id = Consts.DRAGONS;
-                break;
-            case 'ヤ':
-                id = Consts.SWALLOWS;
-                break;
-
-        }
-
-        return id;
+        //     },
+        //     error => {
+        //         console.log(error);
+        //     }
+        // );
     }
 
     createUuid(team: string, name: string, series: string): string{
+        // return null;
         return btoa(unescape(encodeURIComponent(team+name+series)));
     }
 
