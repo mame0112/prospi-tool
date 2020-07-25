@@ -14,8 +14,8 @@ export class ComboComponent implements OnInit {
       private comboServce: ComboCalculateService) { }
 
   ngOnInit(): void {
-      let player = this.holderService.getAllPositionData();
-      console.log(player);
+      // let player = this.holderService.getAllPositionData();
+      // console.log(player);
   }
 
 }

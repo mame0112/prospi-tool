@@ -25,8 +25,8 @@ export class ComboCalculateService implements OnInit {
     }
 
     ngOnInit(): void {
-        this.players = this.holderService.getAllPositionData();
-        this.executeComboCheck();
+        // this.players = this.holderService.getAllPositionData();
+        // this.executeComboCheck();
     }
 
     executeComboCheck(): void {

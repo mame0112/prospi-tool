@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 
+import { Observable, of, concat } from 'rxjs';
+
 import { CookieService } from 'ngx-cookie-service';
+import { PlayerListLoaderService } from './player-list-loader.service';
 
 import { Consts } from './consts';
 
@@ -12,6 +15,9 @@ import { Batter } from './batter';
   providedIn: 'root'
 })
 export class PlayerHolderService {
+
+    batterArray: Batter[] = [];
+    pitcherArray: Pitcher[] = [];
 
     starter1: Pitcher;
     starter2: Pitcher;
@@ -46,20 +52,92 @@ export class PlayerHolderService {
     batter_alt1: Batter;
     batter_alt2: Batter;
 
-    constructor(private cookieService: CookieService) {
+    // playerListObservable: any;
+    // orderListObservable: any;
+
+    constructor(private cookieService: CookieService,
+        private loaderService: PlayerListLoaderService) {
         console.log('PlayerHolderService Constructor');
+        this.initialize();
+    }
+
+    initialize(): void {
+        if(this.pitcherArray.length == 0){
+            // this.playerListObservable = this.loaderService.loadPitcherCandidateList();
+            // this.orderListObservable = this
+            // this.loaderService.loadPitcherCandidateList().subscribe(result => {
+            //     this.pitcherArray = result;
+            // })
+        } else {
+
+        }
+
+        if(this.batterArray.length == 0){
+            this.loaderService.loadBatterCandidateList().subscribe(result => {
+                this.batterArray = result;
+            })
+        }
     }
 
     storeCookie(target: string, player: Player): void {
-        this.cookieService.set(target, JSON.stringify(player));
         console.log('storeCookie');
-        // console.log(JSON.stringify(player));
-        // console.log(JSON.stringify(player).length);
+        this.cookieService.set(target, JSON.stringify(player));
+    }
+
+    loadPitcherOrderList(): Observable<any> {
+        console.log('loadPitcherOrderList');
+        return new Observable(observable=>{
+            this.loaderService.loadPitcherCandidateList().subscribe(result => {
+                this.pitcherArray = result;
+                console.log(result);
+
+                let pitchers = this.getPitcherData();
+
+                console.log(pitchers);
+                observable.next(pitchers);
+                observable.complete();
+            });
+        });
+    }
+
+    loadBatterOrderList(): Observable<any> {
+        return new Observable(observable=>{
+            this.loaderService.loadBatterCandidateList().subscribe(result => {
+                this.pitcherArray = result;
+
+                let batters = this.getBatterData();
+                observable.next(batters);
+                observable.complete();
+            });
+        });
+    }
+
+    private findPitcherFromList(uuid: string): any{
+        console.log('findPitcherFromList');
+        for (let item of this.pitcherArray){
+            if(JSON.stringify(item).indexOf(uuid) != -1){
+                console.log('Item found');
+                return item;
+            }
+        }
+        return null;
+    }
+
+    private findBatterFromList(uuid: string): any{
+        console.log('findBatterFromList');
+        for (let item of this.batterArray){
+            if(JSON.stringify(item).indexOf(uuid) != -1){
+                console.log('Item found');
+                return item;
+            }
+        }
+        return null;
     }
 
 
     storeStarter1(pitcher: Pitcher): void{
         console.log('storeStarter1');
+        // console.log(JSON.stringify(pitcher).indexOf('5pel546J5LqVMjAyMFMx'));
         Consts.USE_COOKIE ? this.storeCookie(Consts.STARTER1, pitcher.uuid):this.starter1 = pitcher;
     }
     storeStarter2(pitcher: Pitcher): void{
@@ -148,7 +226,7 @@ export class PlayerHolderService {
         Consts.USE_COOKIE ? this.storeCookie(Consts.BATTER_ALT2, batter.uuid):this.batter_alt2 = batter;
     }
 
-    updatePitcherTitle(name: string, pitcher: Pitcher, title: string): void {
+    private updatePitcherTitle(name: string, pitcher: Pitcher, title: string): void {
         if(Consts.USE_COOKIE){
             let p: Pitcher = JSON.parse(this.cookieService.get(name));
             p.title = title
@@ -207,7 +285,7 @@ export class PlayerHolderService {
         
     }
 
-    updateBatterTitle(name: string, batter: Batter, title: string): void {
+    private updateBatterTitle(name: string, batter: Batter, title: string): void {
         if(Consts.USE_COOKIE){
             let b: Batter = JSON.parse(this.cookieService.get(name));
             b.title = title
@@ -272,177 +350,145 @@ export class PlayerHolderService {
         
     }
 
-    getCookiePitcherData(pisition: string): Pitcher{
+    private getCookiePitcherData(pisition: string): Pitcher{
+        console.log('getCookiePitcherData');
+        console.log(pisition);
         if (this.cookieService.check(pisition)){
-            return JSON.parse(this.cookieService.get(pisition));
+            console.log('Check OK');
+            console.log(this.cookieService.get(pisition));
+            return this.findPitcherFromList(this.cookieService.get(pisition));
+            // return JSON.parse(this.cookieService.get(pisition));
         }
         else {
             return null;
         }
     }
 
-    getCookieBatterData(pisition: string): Batter{
+    private getCookieBatterData(pisition: string): Batter{
         if (this.cookieService.check(pisition)){
-            return JSON.parse(this.cookieService.get(pisition));
+            console.log(this.cookieService.get(pisition));
+            return this.findBatterFromList(this.cookieService.get(pisition));
         }
         else {
             return null;
         }
     }
 
-    getStarter1(): Pitcher{
-        return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.STARTER1):this.starter1;
-    }
-    getStarter2(): Pitcher{
-        return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.STARTER2):this.starter2;
-    }
-    getStarter3(): Pitcher{
-        return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.STARTER3):this.starter3;
-    }
-    getStarter4(): Pitcher{
-        return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.STARTER4):this.starter4;
-    }
-    getStarter5(): Pitcher{
-        return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.STARTER5):this.starter5;
-    }
-    getSetupper1(): Pitcher{
-        return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.SETUPPER1):this.setupper1;
-    }
-    getSetupper2(): Pitcher{
-        return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.SETUPPER2):this.setupper2;
-    }
-    getSetupper3(): Pitcher{
-        return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.SETUPPER3):this.setupper3;
-    }
-    getSetupper4(): Pitcher{
-        return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.SETUPPER4):this.setupper4;
-    }
-    getCloser(): Pitcher{
-        return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.CLOSESR):this.closer;
-    }
-    getPitcherBench(): Pitcher{
-        return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.PITCHER_BENCH):this.pitcher_bench;
-    }
-    getPitcherAlt1(): Pitcher{
-        return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.PITCHER_ALT1):this.pitcher_alt1;
-    }
-    getPitcherAlt2(): Pitcher{
-        return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.PITCHER_ALT2):this.pitcher_alt2;
-    }
-    getCatcher(): Batter{
-        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.CATCHER):this.catcher;
-    }
-    getFirst(): Batter{
-        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.FIRST):this.first;
-    }
-    getSecond(): Batter{
-        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.SECOND):this.second;
-    }
-    getThird(): Batter{
-        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.THIRD):this.third;
-    }
-    getShort(): Batter{
-        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.SHORT):this.short;
-    }
-    getLeft(): Batter{
-        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.LEFT):this.left;
-    }
-    getCenter(): Batter{
-        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.CENTER):this.center;
-    }
-    getRight(): Batter{
-        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.RIGHT):this.right;
-    }
-    getDh(): Batter{
-        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.DH):this.dh;
-    }
-    getBatterBench1(): Batter{
-        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.BATTER_BENCH1):this.batter_bench1;
-    }
-    getBatterBench2(): Batter{
-        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.BATTER_BENCH2):this.batter_bench2;
-    }
-    getBatterBench3(): Batter{
-        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.BATTER_BENCH3):this.batter_bench3;
-    }
-    getBatterBench4(): Batter{
-        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.BATTER_BENCH4):this.batter_bench4;
-    }
-    getBatterAlt1(): Batter{
-        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.BATTER_ALT1):this.batter_alt1;
-    }
-    getBatterAlt2(): Batter{
-        return Consts.USE_COOKIE? this.getCookieBatterData(Consts.BATTER_ALT2):this.batter_alt2;
+    // getStarter1(): Pitcher{
+    //     return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.STARTER1):this.starter1;
+    // }
+    // getStarter2(): Pitcher{
+    //     return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.STARTER2):this.starter2;
+    // }
+    // getStarter3(): Pitcher{
+    //     return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.STARTER3):this.starter3;
+    // }
+    // getStarter4(): Pitcher{
+    //     return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.STARTER4):this.starter4;
+    // }
+    // getStarter5(): Pitcher{
+    //     return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.STARTER5):this.starter5;
+    // }
+    // getSetupper1(): Pitcher{
+    //     return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.SETUPPER1):this.setupper1;
+    // }
+    // getSetupper2(): Pitcher{
+    //     return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.SETUPPER2):this.setupper2;
+    // }
+    // getSetupper3(): Pitcher{
+    //     return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.SETUPPER3):this.setupper3;
+    // }
+    // getSetupper4(): Pitcher{
+    //     return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.SETUPPER4):this.setupper4;
+    // }
+    // getCloser(): Pitcher{
+    //     return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.CLOSESR):this.closer;
+    // }
+    // getPitcherBench(): Pitcher{
+    //     return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.PITCHER_BENCH):this.pitcher_bench;
+    // }
+    // getPitcherAlt1(): Pitcher{
+    //     return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.PITCHER_ALT1):this.pitcher_alt1;
+    // }
+    // getPitcherAlt2(): Pitcher{
+    //     return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.PITCHER_ALT2):this.pitcher_alt2;
+    // }
+    // getCatcher(): Batter{
+    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.CATCHER):this.catcher;
+    // }
+    // getFirst(): Batter{
+    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.FIRST):this.first;
+    // }
+    // getSecond(): Batter{
+    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.SECOND):this.second;
+    // }
+    // getThird(): Batter{
+    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.THIRD):this.third;
+    // }
+    // getShort(): Batter{
+    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.SHORT):this.short;
+    // }
+    // getLeft(): Batter{
+    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.LEFT):this.left;
+    // }
+    // getCenter(): Batter{
+    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.CENTER):this.center;
+    // }
+    // getRight(): Batter{
+    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.RIGHT):this.right;
+    // }
+    // getDh(): Batter{
+    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.DH):this.dh;
+    // }
+    // getBatterBench1(): Batter{
+    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.BATTER_BENCH1):this.batter_bench1;
+    // }
+    // getBatterBench2(): Batter{
+    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.BATTER_BENCH2):this.batter_bench2;
+    // }
+    // getBatterBench3(): Batter{
+    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.BATTER_BENCH3):this.batter_bench3;
+    // }
+    // getBatterBench4(): Batter{
+    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.BATTER_BENCH4):this.batter_bench4;
+    // }
+    // getBatterAlt1(): Batter{
+    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.BATTER_ALT1):this.batter_alt1;
+    // }
+    // getBatterAlt2(): Batter{
+    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.BATTER_ALT2):this.batter_alt2;
+    // }
+
+    // getAllPositionData(): Player[]{
+    //     let data: Player[] = [];
+
+    //     data.push(this.getPitcherData());
+    //     data.push(this.getBatterData());
+
+    //     return data;
+    // }
+
+    getAllBatterData(): Observable<any> {
+        let data = this.getBatterData();
+
+        return new Observable<any>(observable => {
+            observable.next();
+            observable.complete();
+        });
     }
 
-    getAllPositionData(): Player[]{
-        let data: Player[] = [];
 
-        if(Consts.USE_COOKIE){
-            data.push({key: Consts.STARTER1, value:this.getCookiePitcherData(Consts.STARTER1)});
-            data.push({key: Consts.STARTER2, value:this.getCookiePitcherData(Consts.STARTER2)});
-            data.push({key: Consts.STARTER3, value:this.getCookiePitcherData(Consts.STARTER3)});
-            data.push({key: Consts.STARTER4, value:this.getCookiePitcherData(Consts.STARTER4)});
-            data.push({key: Consts.STARTER5, value:this.getCookiePitcherData(Consts.STARTER5)});
-            data.push({key: Consts.SETUPPER1, value:this.getCookiePitcherData(Consts.SETUPPER1)});
-            data.push({key: Consts.SETUPPER2, value:this.getCookiePitcherData(Consts.SETUPPER2)});
-            data.push({key: Consts.SETUPPER3, value:this.getCookiePitcherData(Consts.SETUPPER3)});
-            data.push({key: Consts.SETUPPER4, value:this.getCookiePitcherData(Consts.SETUPPER4)});
-            data.push({key: Consts.CLOSESR, value:this.getCookiePitcherData(Consts.CLOSESR)});
-            data.push({key: Consts.PITCHER_BENCH, value:this.getCookiePitcherData(Consts.PITCHER_BENCH)});
-            data.push({key: Consts.PITCHER_ALT1, value:this.getCookiePitcherData(Consts.PITCHER_ALT1)});
-            data.push({key: Consts.PITCHER_ALT2, value:this.getCookiePitcherData(Consts.PITCHER_ALT2)});
-            data.push({key: Consts.CATCHER, value:this.getCookieBatterData(Consts.CATCHER)});
-            data.push({key: Consts.FIRST, value:this.getCookieBatterData(Consts.FIRST)});
-            data.push({key: Consts.SECOND, value:this.getCookieBatterData(Consts.SECOND)});
-            data.push({key: Consts.THIRD, value:this.getCookieBatterData(Consts.THIRD)});
-            data.push({key: Consts.SHORT, value:this.getCookieBatterData(Consts.SHORT)});
-            data.push({key: Consts.LEFT, value:this.getCookieBatterData(Consts.LEFT)});
-            data.push({key: Consts.CENTER, value:this.getCookieBatterData(Consts.CENTER)});
-            data.push({key: Consts.RIGHT, value:this.getCookieBatterData(Consts.RIGHT)});
-            data.push({key: Consts.DH, value:this.getCookieBatterData(Consts.DH)});
-            data.push({key: Consts.BATTER_BENCH1, value:this.getCookieBatterData(Consts.BATTER_BENCH1)});
-            data.push({key: Consts.BATTER_BENCH2, value:this.getCookieBatterData(Consts.BATTER_BENCH2)});
-            data.push({key: Consts.BATTER_BENCH3, value:this.getCookieBatterData(Consts.BATTER_BENCH3)});
-            data.push({key: Consts.BATTER_BENCH4, value:this.getCookieBatterData(Consts.BATTER_BENCH4)});
-            data.push({key: Consts.BATTER_ALT1, value:this.getCookieBatterData(Consts.BATTER_ALT1)});
-            data.push({key: Consts.BATTER_ALT2, value:this.getCookieBatterData(Consts.BATTER_ALT2)});
-        } else {
-            data.push({key: Consts.STARTER1, value:this.starter1});
-            data.push({key: Consts.STARTER2, value:this.starter2});
-            data.push({key: Consts.STARTER3, value:this.starter3});
-            data.push({key: Consts.STARTER4, value:this.starter4});
-            data.push({key: Consts.STARTER5, value:this.starter5});
-            data.push({key: Consts.SETUPPER1, value:this.setupper1});
-            data.push({key: Consts.SETUPPER2, value:this.setupper2});
-            data.push({key: Consts.SETUPPER3, value:this.setupper3});
-            data.push({key: Consts.SETUPPER4, value:this.setupper4});
-            data.push({key: Consts.CLOSESR, value:this.closer});
-            data.push({key: Consts.PITCHER_BENCH, value:this.pitcher_bench});
-            data.push({key: Consts.PITCHER_ALT1, value:this.pitcher_alt1});
-            data.push({key: Consts.PITCHER_ALT2, value:this.pitcher_alt2});
-            data.push({key: Consts.CATCHER, value:this.catcher});
-            data.push({key: Consts.FIRST, value:this.first});
-            data.push({key: Consts.SECOND, value:this.second});
-            data.push({key: Consts.THIRD, value:this.third});
-            data.push({key: Consts.SHORT, value:this.short});
-            data.push({key: Consts.LEFT, value:this.left});
-            data.push({key: Consts.CENTER, value:this.center});
-            data.push({key: Consts.RIGHT, value:this.right});
-            data.push({key: Consts.DH, value:this.dh});
-            data.push({key: Consts.BATTER_BENCH1, value:this.batter_bench1});
-            data.push({key: Consts.BATTER_BENCH2, value:this.batter_bench2});
-            data.push({key: Consts.BATTER_BENCH3, value:this.batter_bench3});
-            data.push({key: Consts.BATTER_BENCH4, value:this.batter_bench4});
-            data.push({key: Consts.BATTER_ALT1, value:this.batter_alt1});
-            data.push({key: Consts.BATTER_ALT2, value:this.batter_alt2});
-        }
+    getAllPitcherData(): Observable<any> {
+        let data = this.getPitcherData();
 
-
-        return data;
+        return new Observable<any>(observable => {
+            observable.next();
+            observable.complete();
+        });
     }
 
-    getAllPitcherData(): Player[]{
+    private getPitcherData(): Player[]{
+
         let data: Player[] = [];
 
         if(Consts.USE_COOKIE){
@@ -476,11 +522,10 @@ export class PlayerHolderService {
             data.push({key: Consts.PITCHER_ALT2, value:this.pitcher_alt2});
         }
 
-
         return data;
     }
 
-    getAllBatterData(): Player[]{
+    private getBatterData(): Player[]{
         let data: Player[] = [];
 
         if(Consts.USE_COOKIE){
