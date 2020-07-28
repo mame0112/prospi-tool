@@ -176,6 +176,7 @@ export class CandidatePitcherComponent implements OnInit {
     }
 
     storeDataToHolderService(position: string, player: Pitcher): void {
+        console.log(player);
         switch(position){
             case 'starter1':
                 this.holderService.storeStarter1(player);

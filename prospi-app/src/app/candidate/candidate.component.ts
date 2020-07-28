@@ -8,6 +8,7 @@ import { Consts } from '../consts';
 import { PlayerHolderService } from '../player-holder.service';
 
 import { Util } from '../util/util';
+import { UuidUtil } from '../util/uuid-util';
 
 import { Player } from '../player';
 import { Pitcher } from '../pitcher';
@@ -61,7 +62,7 @@ export class CandidateComponent implements OnInit {
                     for (let index = 1; index < csvToRowArray.length - 1; index++) {
                       let row = csvToRowArray[index].split(",");
                       // console.log(row[0]);
-                      this.pitcherArray.push(new Pitcher(this.createId(row[0]), this.createUuid(row[0], row[2], row[3]), row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18], row[19], row[20]));
+                      this.pitcherArray.push(new Pitcher(this.createId(row[0]), new UuidUtil().createUuid(row[0], row[2], row[3]), row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18], row[19], row[20]));
                     }
                   // this.targetPithers = this.pitcherArray
                   this.targetPithers = JSON.parse(JSON.stringify(this.pitcherArray));
@@ -80,7 +81,7 @@ export class CandidateComponent implements OnInit {
                     for (let index = 1; index < csvToRowArray.length - 1; index++) {
                       let row = csvToRowArray[index].split(",");
                       console.log(row);
-                      this.batterArray.push(new Batter(this.createId(row[0]), this.createUuid(row[0], row[2], row[3]), row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18], row[19], row[20], row[21], row[22], row[23], row[24], row[25]));
+                      this.batterArray.push(new Batter(this.createId(row[0]), new UuidUtil().createUuid(row[0], row[2], row[3]), row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18], row[19], row[20], row[21], row[22], row[23], row[24], row[25]));
                     }
                   this.targetBatters = JSON.parse(JSON.stringify(this.batterArray));
                   this.listItem.push(this.targetBatters);
@@ -138,9 +139,9 @@ export class CandidateComponent implements OnInit {
         return id;
     }
 
-    createUuid(team: string, name: string, series: string): string{
-        return btoa(unescape(encodeURIComponent(team+name+series)));
-    }
+    // createUuid(team: string, name: string, series: string): string{
+    //     return btoa(unescape(encodeURIComponent(team+name+series)));
+    // }
 
 
     onSubmit(): void {

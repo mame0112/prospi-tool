@@ -59,10 +59,10 @@ export class CandidateBatterComponent implements OnInit {
             });
     }
 
-    createUuid(team: string, name: string, series: string): string{
-        // return null;
-        return btoa(unescape(encodeURIComponent(team+name+series)));
-    }
+    // createUuid(team: string, name: string, series: string): string{
+    //     // return null;
+    //     return btoa(unescape(encodeURIComponent(team+name+series)));
+    // }
 
 
     onSubmit(): void {

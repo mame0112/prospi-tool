@@ -10,6 +10,7 @@ import { Consts } from './consts';
 import { Player } from './player';
 import { Pitcher } from './pitcher';
 import { Batter } from './batter';
+import { Title } from './title';
 
 @Injectable({
   providedIn: 'root'
@@ -58,30 +59,15 @@ export class PlayerHolderService {
     constructor(private cookieService: CookieService,
         private loaderService: PlayerListLoaderService) {
         console.log('PlayerHolderService Constructor');
-        this.initialize();
     }
 
-    initialize(): void {
-        if(this.pitcherArray.length == 0){
-            // this.playerListObservable = this.loaderService.loadPitcherCandidateList();
-            // this.orderListObservable = this
-            // this.loaderService.loadPitcherCandidateList().subscribe(result => {
-            //     this.pitcherArray = result;
-            // })
-        } else {
-
-        }
-
-        if(this.batterArray.length == 0){
-            this.loaderService.loadBatterCandidateList().subscribe(result => {
-                this.batterArray = result;
-            })
-        }
-    }
-
-    storeCookie(target: string, player: Player): void {
+    private storeCookie(target: string, player: string): void {
         console.log('storeCookie');
-        this.cookieService.set(target, JSON.stringify(player));
+        // console.log(JSON.stringify(player));
+        // console.log(player);
+        // console.log(JSON.stringify(player));
+        // this.cookieService.set(target, JSON.stringify(player));
+        this.cookieService.set(target, player);
     }
 
     loadPitcherOrderList(): Observable<any> {
@@ -89,11 +75,10 @@ export class PlayerHolderService {
         return new Observable(observable=>{
             this.loaderService.loadPitcherCandidateList().subscribe(result => {
                 this.pitcherArray = result;
-                console.log(result);
 
                 let pitchers = this.getPitcherData();
-
                 console.log(pitchers);
+
                 observable.next(pitchers);
                 observable.complete();
             });
@@ -103,7 +88,7 @@ export class PlayerHolderService {
     loadBatterOrderList(): Observable<any> {
         return new Observable(observable=>{
             this.loaderService.loadBatterCandidateList().subscribe(result => {
-                this.pitcherArray = result;
+                this.batterArray = result;
 
                 let batters = this.getBatterData();
                 observable.next(batters);
@@ -114,6 +99,7 @@ export class PlayerHolderService {
 
     private findPitcherFromList(uuid: string): any{
         console.log('findPitcherFromList');
+        console.log(uuid);
         for (let item of this.pitcherArray){
             if(JSON.stringify(item).indexOf(uuid) != -1){
                 console.log('Item found');
@@ -134,10 +120,21 @@ export class PlayerHolderService {
         return null;
     }
 
+    private findPitcherTitle(title_id: string): any {
+        console.log('findPitcherTitle');
+        for (let item of Title.pitcher_titles){
+            if(JSON.stringify(item).indexOf(title_id) != -1){
+                console.log('Title found');
+                return item;
+            }
+        }
+    }
 
     storeStarter1(pitcher: Pitcher): void{
-        console.log('storeStarter1');
+        console.log(pitcher);
         // console.log(JSON.stringify(pitcher).indexOf('5pel546J5LqVMjAyMFMx'));
+        // Consts.USE_COOKIE ? this.storeCookie(Consts.STARTER1, this.createResultJson(pitcher.uuid, null)):this.starter1 = pitcher;
+        // this.storeCookie(Consts.STARTER1, this.createStoreData(pitcher.uuid, null));
         Consts.USE_COOKIE ? this.storeCookie(Consts.STARTER1, pitcher.uuid):this.starter1 = pitcher;
     }
     storeStarter2(pitcher: Pitcher): void{
@@ -227,69 +224,82 @@ export class PlayerHolderService {
     }
 
     private updatePitcherTitle(name: string, pitcher: Pitcher, title: string): void {
-        if(Consts.USE_COOKIE){
-            let p: Pitcher = JSON.parse(this.cookieService.get(name));
-            p.title = title
-            this.cookieService.set(name, JSON.stringify(p));
-        } else {
-            pitcher.title = title;
-        }
+        console.log(pitcher);
+        pitcher.title = title;
+        // let st = this.createStoreData(pitcher.uuid, title);
+        // let p: string = this.cookieService.get(name);
+        // console.log(p);
+
+        // let p: Pitcher = JSON.parse(this.cookieService.get(name));
+        // p.title = title
+        // this.cookieService.set(name, JSON.stringify(p));
     }
 
     setPitcherTitle(positionName: string, title: any): void {
 
         console.log('setPitcherTitle');
 
-        switch(positionName){
-            case Consts.STARTER1:
-                this.updatePitcherTitle(Consts.STARTER1, this.starter1, title);
-                break;
-            case Consts.STARTER2:
-                this.updatePitcherTitle(Consts.STARTER2, this.starter2, title);
-                break;
-            case Consts.STARTER3:
-                this.updatePitcherTitle(Consts.STARTER3, this.starter3, title);
-                break;
-            case Consts.STARTER4:
-                this.updatePitcherTitle(Consts.STARTER4, this.starter4, title);
-                break;
-            case Consts.STARTER5:
-                this.updatePitcherTitle(Consts.STARTER5, this.starter5, title);
-                break;
-            case Consts.SETUPPER1:
-                this.updatePitcherTitle(Consts.SETUPPER1, this.setupper1, title);
-                break;
-            case Consts.SETUPPER2:
-                this.updatePitcherTitle(Consts.SETUPPER2, this.setupper2, title);
-                break;
-            case Consts.SETUPPER3:
-                this.updatePitcherTitle(Consts.SETUPPER3, this.setupper3, title);
-                break;
-            case Consts.SETUPPER4:
-                this.updatePitcherTitle(Consts.SETUPPER4, this.setupper4, title);
-                break;
-            case Consts.CLOSESR:
-                this.updatePitcherTitle(Consts.CLOSESR, this.closer, title);
-                break;
-            case Consts.PITCHER_BENCH:
-                this.updatePitcherTitle(Consts.PITCHER_BENCH, this.pitcher_bench, title);
-                break;
-            case Consts.PITCHER_ALT1:
-                this.updatePitcherTitle(Consts.PITCHER_ALT1, this.pitcher_alt1, title);
-                break;
-            case Consts.PITCHER_ALT2:
-                this.updatePitcherTitle(Consts.PITCHER_ALT2, this.pitcher_alt2, title);
-                break;
+        if (Consts.USE_COOKIE){
+            let p: Pitcher = this.getCookiePitcherData(positionName);
+            let data = this.createStoreData(p.uuid, title);
+            this.storeCookie(positionName, data);
 
-        }
-        
+        } else {
+            switch(positionName){
+                case Consts.STARTER1:
+                    this.updatePitcherTitle(Consts.STARTER1, this.starter1, title);
+                    break;
+                case Consts.STARTER2:
+                    this.updatePitcherTitle(Consts.STARTER2, this.starter2, title);
+                    break;
+                case Consts.STARTER3:
+                    this.updatePitcherTitle(Consts.STARTER3, this.starter3, title);
+                    break;
+                case Consts.STARTER4:
+                    this.updatePitcherTitle(Consts.STARTER4, this.starter4, title);
+                    break;
+                case Consts.STARTER5:
+                    this.updatePitcherTitle(Consts.STARTER5, this.starter5, title);
+                    break;
+                case Consts.SETUPPER1:
+                    this.updatePitcherTitle(Consts.SETUPPER1, this.setupper1, title);
+                    break;
+                case Consts.SETUPPER2:
+                    this.updatePitcherTitle(Consts.SETUPPER2, this.setupper2, title);
+                    break;
+                case Consts.SETUPPER3:
+                    this.updatePitcherTitle(Consts.SETUPPER3, this.setupper3, title);
+                    break;
+                case Consts.SETUPPER4:
+                    this.updatePitcherTitle(Consts.SETUPPER4, this.setupper4, title);
+                    break;
+                case Consts.CLOSESR:
+                    this.updatePitcherTitle(Consts.CLOSESR, this.closer, title);
+                    break;
+                case Consts.PITCHER_BENCH:
+                    this.updatePitcherTitle(Consts.PITCHER_BENCH, this.pitcher_bench, title);
+                    break;
+                case Consts.PITCHER_ALT1:
+                    this.updatePitcherTitle(Consts.PITCHER_ALT1, this.pitcher_alt1, title);
+                    break;
+                case Consts.PITCHER_ALT2:
+                    this.updatePitcherTitle(Consts.PITCHER_ALT2, this.pitcher_alt2, title);
+                    break;
+            }
+        }        
     }
 
-    private updateBatterTitle(name: string, batter: Batter, title: string): void {
+    // Second argument is null in case if we use cookie
+    private updateBatterTitle(position: string, batter: Batter, title: string): void {
         if(Consts.USE_COOKIE){
-            let b: Batter = JSON.parse(this.cookieService.get(name));
-            b.title = title
-            this.cookieService.set(name, JSON.stringify(b));
+            let uuid = JSON.parse(this.cookieService.get(position));
+            let b: Batter;
+            b = this.findBatterFromList(uuid);
+            if(b != null){
+                //TODO
+                b.title = title
+                // this.cookieService.set(position, JSON.stringify(b));
+            }
         } else {
             batter.title = title;
         }
@@ -301,6 +311,7 @@ export class PlayerHolderService {
 
         switch(positionName){
             case Consts.CATCHER:
+                // Consts.USE_COOKIE ? this.storeCookie(Consts.BATTER_BENCH3, batter.uuid):this.batter_bench3 = batter;
                 this.updateBatterTitle(Consts.CATCHER, this.catcher, title);
                 break;
             case Consts.FIRST:
@@ -353,10 +364,34 @@ export class PlayerHolderService {
     private getCookiePitcherData(pisition: string): Pitcher{
         console.log('getCookiePitcherData');
         console.log(pisition);
+        // console.log(pisition);
         if (this.cookieService.check(pisition)){
-            console.log('Check OK');
-            console.log(this.cookieService.get(pisition));
-            return this.findPitcherFromList(this.cookieService.get(pisition));
+            // console.log('Check OK');
+            // console.log(this.cookieService.get(pisition));
+            let cookie_data = this.cookieService.get(pisition);
+
+
+            let index = cookie_data.indexOf('@');
+            let uuid = null;
+            if(index != -1){
+                uuid = cookie_data.substr(0, index);
+            } else {
+                uuid = cookie_data;
+            }
+
+            let player = this.findPitcherFromList(uuid);
+            let title_id = cookie_data.substr(index+1);
+            // let player = this.findPitcherFromList(cookie_data['player']);
+            // let title_id = cookie_data['title'];
+
+
+            let title = null;
+
+            if(title_id != null && title_id != 'null'){
+                title = this.findPitcherTitle(title_id);
+            }
+
+            return this.createResultJson(player, title);
             // return JSON.parse(this.cookieService.get(pisition));
         }
         else {
@@ -374,105 +409,33 @@ export class PlayerHolderService {
         }
     }
 
-    // getStarter1(): Pitcher{
-    //     return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.STARTER1):this.starter1;
-    // }
-    // getStarter2(): Pitcher{
-    //     return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.STARTER2):this.starter2;
-    // }
-    // getStarter3(): Pitcher{
-    //     return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.STARTER3):this.starter3;
-    // }
-    // getStarter4(): Pitcher{
-    //     return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.STARTER4):this.starter4;
-    // }
-    // getStarter5(): Pitcher{
-    //     return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.STARTER5):this.starter5;
-    // }
-    // getSetupper1(): Pitcher{
-    //     return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.SETUPPER1):this.setupper1;
-    // }
-    // getSetupper2(): Pitcher{
-    //     return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.SETUPPER2):this.setupper2;
-    // }
-    // getSetupper3(): Pitcher{
-    //     return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.SETUPPER3):this.setupper3;
-    // }
-    // getSetupper4(): Pitcher{
-    //     return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.SETUPPER4):this.setupper4;
-    // }
-    // getCloser(): Pitcher{
-    //     return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.CLOSESR):this.closer;
-    // }
-    // getPitcherBench(): Pitcher{
-    //     return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.PITCHER_BENCH):this.pitcher_bench;
-    // }
-    // getPitcherAlt1(): Pitcher{
-    //     return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.PITCHER_ALT1):this.pitcher_alt1;
-    // }
-    // getPitcherAlt2(): Pitcher{
-    //     return Consts.USE_COOKIE? this.getCookiePitcherData(Consts.PITCHER_ALT2):this.pitcher_alt2;
-    // }
-    // getCatcher(): Batter{
-    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.CATCHER):this.catcher;
-    // }
-    // getFirst(): Batter{
-    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.FIRST):this.first;
-    // }
-    // getSecond(): Batter{
-    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.SECOND):this.second;
-    // }
-    // getThird(): Batter{
-    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.THIRD):this.third;
-    // }
-    // getShort(): Batter{
-    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.SHORT):this.short;
-    // }
-    // getLeft(): Batter{
-    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.LEFT):this.left;
-    // }
-    // getCenter(): Batter{
-    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.CENTER):this.center;
-    // }
-    // getRight(): Batter{
-    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.RIGHT):this.right;
-    // }
-    // getDh(): Batter{
-    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.DH):this.dh;
-    // }
-    // getBatterBench1(): Batter{
-    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.BATTER_BENCH1):this.batter_bench1;
-    // }
-    // getBatterBench2(): Batter{
-    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.BATTER_BENCH2):this.batter_bench2;
-    // }
-    // getBatterBench3(): Batter{
-    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.BATTER_BENCH3):this.batter_bench3;
-    // }
-    // getBatterBench4(): Batter{
-    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.BATTER_BENCH4):this.batter_bench4;
-    // }
-    // getBatterAlt1(): Batter{
-    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.BATTER_ALT1):this.batter_alt1;
-    // }
-    // getBatterAlt2(): Batter{
-    //     return Consts.USE_COOKIE? this.getCookieBatterData(Consts.BATTER_ALT2):this.batter_alt2;
-    // }
+    private getCookiePitcherTitle(position: string): string{
+        console.log('getCookiePitcherTitle');
+        if (this.cookieService.check(position)){
+        }
 
-    // getAllPositionData(): Player[]{
-    //     let data: Player[] = [];
+        return null;
+    }
 
-    //     data.push(this.getPitcherData());
-    //     data.push(this.getBatterData());
+    private createStoreData(uuid: string, title: string): string {
+        return uuid + '@' + title;
+    }
 
-    //     return data;
-    // }
+    private createResultJson(player: any, title: any): any {
+        let result = [];
+        result['player'] = player;
+        result['title'] = title;
+        // let result = null;
+        // result = player + '@' + title;
+
+        return result;
+    }
 
     getAllBatterData(): Observable<any> {
         let data = this.getBatterData();
 
         return new Observable<any>(observable => {
-            observable.next();
+            observable.next(data);
             observable.complete();
         });
     }
@@ -482,7 +445,7 @@ export class PlayerHolderService {
         let data = this.getPitcherData();
 
         return new Observable<any>(observable => {
-            observable.next();
+            observable.next(data);
             observable.complete();
         });
     }
@@ -492,6 +455,7 @@ export class PlayerHolderService {
         let data: Player[] = [];
 
         if(Consts.USE_COOKIE){
+            console.log(this.getCookiePitcherData(Consts.STARTER1));
             data.push({key: Consts.STARTER1, value:this.getCookiePitcherData(Consts.STARTER1)});
             data.push({key: Consts.STARTER2, value:this.getCookiePitcherData(Consts.STARTER2)});
             data.push({key: Consts.STARTER3, value:this.getCookiePitcherData(Consts.STARTER3)});
@@ -563,6 +527,11 @@ export class PlayerHolderService {
         }
 
         return data;
+    }
+
+    deleteAllCookies(): void {
+        console.log('deleteAllCookies');
+        this.cookieService.deleteAll();
     }
 
 }
