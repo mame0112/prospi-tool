@@ -100,8 +100,11 @@
                     <div fxFlex>
                         ランク
                     </div>
-                    <div fxFlex>
+                    <div fxFlex *ngIf="h.value != null">
                         {{h.value.rank}}
+                    </div>
+                    <div fxFlex *ngIf="h.value == null">
+                        -
                     </div>
                 </div>
             </div>
@@ -265,8 +268,11 @@
                     <div fxFlex>
                         ランク
                     </div>
-                    <div fxFlex>
+                    <div fxFlex *ngIf="h.value != null">
                         {{h.value.rank}}
+                    </div>
+                    <div fxFlex *ngIf="h.value == null">
+                        -
                     </div>
                 </div>
             </div>
