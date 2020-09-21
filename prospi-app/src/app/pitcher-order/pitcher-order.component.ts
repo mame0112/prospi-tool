@@ -125,5 +125,10 @@ export class PitcherOrderComponent implements OnInit {
         this.holderService.deleteAllCookies();
     }
 
+    calcCombo(): void {
+        console.log('calcCombo');
+        this.router.navigate(['/combo']);
+    }
+
 
 }

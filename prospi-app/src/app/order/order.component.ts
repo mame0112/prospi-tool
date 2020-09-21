@@ -32,9 +32,9 @@ export class OrderComponent implements OnInit {
         this.isPitcherListSelected = false;
     }
 
-    calcCombo(): void {
-        console.log('calcCombo');
-        this.router.navigate(['/combo']);
-    }
+    // calcCombo(): void {
+    //     console.log('calcCombo');
+    //     this.router.navigate(['/combo']);
+    // }
 
 }

@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { Consts } from './consts';
 
@@ -15,37 +15,28 @@ import { TeamFormationChecker } from './checker/team-formation-checker';
 @Injectable({
   providedIn: 'root'
 })
-export class ComboCalculateService implements OnInit {
+export class ComboCalculateService {
 
     players: Player[];
     checkResult: CheckResult;
 
+
     constructor(private holderService: PlayerHolderService) {
-        console.log('ComboCalculateService constructor');
+        this.initialize();
     }
 
-    ngOnInit(): void {
-        // this.players = this.holderService.getAllPositionData();
-        // this.executeComboCheck();
+    initialize(): void {
+        this.holderService.loadPitcherOrderList().subscribe(params => {
+            console.log(params);
+            this.players = params;
+            this.executeComboCheck();
+
+        });
     }
 
     executeComboCheck(): void {
         console.log('executeComboCheck');;
         new TeamFormationChecker().check(this.players);
     }
-
-
-    // extreme_team_spirits = function(): boolean{
-    //     console.log('extreme_team_spirits');
-    //     return true;
-    // }
-
-    // super_team_spirits = function(): boolean{
-    //     return true;
-    // }
-
-
-
-
 
 }

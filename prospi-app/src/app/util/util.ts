@@ -78,25 +78,50 @@ export class Util {
         console.log('is_kiwami_team_spirits');
 
         let result = true;
+        let team = null;
 
         if (players == null || players.length == 0){
             result = false;
         }
 
-        let first = '';
-
-        for (var player in players){
-
-            if (first != player['Team']){
-                //TODO                
+        for (var i in players){
+            if(players[i]['value'].player != null){
+                if(team != null) {
+                    if(team != players[i]['value'].player.team){
+                        console.log(team);
+                        console.log(players[i]['value'].player.team);
+                        console.log('---');
+                        result = false;
+                        break;
+                    }
+                } else {
+                    team = players[i]['value'].player.team;
+                }
             }
-
         }
-
-        console.log(result);
 
         return result;
 
+    }
+
+    static is_all_appropriate_position(players: Player[]): boolean {
+        console.log('is_all_appropriate_position');
+
+        let result = true;
+
+        if (players == null || players.length == 0){
+            return false;
+        }
+
+        for (var i in players){
+            if(players[i]['value'] != null && players[i]['value'].player != null){
+                if (Util.is_appropriate_position(players[i]['key'], players[i]['value'].player) != true) {
+                    return false;
+                }
+            }
+        }
+
+        return false;
     }
 
 
@@ -165,6 +190,107 @@ export class Util {
     return Util.is_giants(player) || Util.is_chunichi(player) || Util.is_hansin(player) || Util.is_yakuruto(player) || Util.is_dena(player) || Util.is_hiroshima(player);
 
 
+    }
+
+    static is_appropriate_position(position: string, player: Player): boolean {
+        console.log('is_appropriate_position');
+
+        if (position == null && player == null) {
+            console.log('position or player is null');
+            return;
+        }
+        switch(position) {
+            case Consts.STARTER1:
+            case Consts.STARTER2:
+            case Consts.STARTER3:
+            case Consts.STARTER4:
+                return Util.is_starter_appropriate(player);
+            case Consts.SETUPPER1:
+            case Consts.SETUPPER2:
+            case Consts.SETUPPER3:
+            case Consts.SETUPPER4:
+                return Util.is_setupper_appropriate(player);
+            case Consts.CLOSESR:
+                return Util.is_closer_appropriate(player);
+            case Consts.FIRST:
+                return Util.is_first_appropriate(player);
+            case Consts.SECOND:
+                return Util.is_second_appropriate(player);
+            case Consts.THIRD:
+                return Util.is_third_appropriate(player);
+            case Consts.SHORT:
+                return Util.is_short_appropriate(player);
+            case Consts.LEFT:
+                return Util.is_left_appropriate(player);
+            case Consts.CENTER:
+                return Util.is_center_appropriate(player);
+            case Consts.RIGHT:
+                return Util.is_right_appropriate(player);
+                default:
+                // For others, nothing to check
+                return true;
+        }
+
+        return false;
+    }
+
+    static get_number_of_each_rank_player(players: Player[]): object {
+        console.log('get_number_of_each_rank_player');
+
+        let s_num = 0;
+        let a_num = 0;
+        let b_num = 0;
+        let c_num = 0;
+        let d_num = 0;
+
+
+        if(players == null || players.length == 0){
+            return null;
+        }
+
+        for (var i in players){
+            if(players[i]['value'] != null && players[i]['value'].player != null){
+                switch (Util.get_player_rank(players[i]['value'].player)){
+                    case Consts.RANK_S:
+                        s_num = s_num + 1;
+                        break;
+                    case Consts.RANK_A:
+                        a_num = a_num + 1;
+                        break;
+                    case Consts.RANK_B:
+                        b_num = b_num + 1;
+                        break;
+                    case Consts.RANK_C:
+                        c_num = c_num + 1;
+                        break;
+                    case Consts.RANK_D:
+                        d_num = d_num + 1;
+                        break;
+
+                }
+            }
+        }
+
+        let result = {
+            'S': s_num,
+            'A': a_num,
+            'B': b_num,
+            'C': c_num,
+            'D': d_num
+        }
+
+        return result;
+
+    }
+
+    static get_average_rank (ranks: object): number {
+        console.log('get_average_rank');
+
+        // if(ranks != null){
+        //     let result = ranks['S']*2;
+        // }
+
+        return 0;
     }
 
 
@@ -494,6 +620,104 @@ export class Util {
         }
 
         return '';
+    }
+
+    static is_starter_appropriate(player: Player): boolean {
+        if(player != null){
+            if (player['position'] == Consts.POSITION_STARTER){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    static is_setupper_appropriate(player: Player): boolean {
+        if(player != null){
+            if (player['position'] == Consts.POSITION_SETUPPER){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    static is_closer_appropriate(player: Player): boolean {
+        if(player != null){
+            if (player['position'] == Consts.POSITION_CLOSER){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    static is_first_appropriate(player: Player): boolean {
+        if(player != null){
+            if (player['position'] == Consts.POSITION_FIRST){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    static is_second_appropriate(player: Player): boolean {
+        if(player != null){
+            if (player['position'] == Consts.POSITION_SECOND){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    static is_third_appropriate(player: Player): boolean {
+        if(player != null){
+            if (player['position'] == Consts.POSITION_THIRD){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    static is_short_appropriate(player: Player): boolean {
+        if(player != null){
+            if (player['position'] == Consts.POSITION_SHORT){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    static is_left_appropriate(player: Player): boolean {
+        if(player != null){
+            if (player['position'] == Consts.POSITION_LEFT){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    static is_center_appropriate(player: Player): boolean {
+        if(player != null){
+            if (player['position'] == Consts.POSITION_CENTER){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    static is_right_appropriate(player: Player): boolean {
+        if(player != null){
+            if (player['position'] == Consts.POSITION_RIGHT){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    static get_player_rank(player: Player): string {
+        console.log('get_player_rank');
+        if (player != null) {
+            console.log(player);
+            return player['rank'];
+        }
     }
 
     static is_hawks(player: Player): boolean {

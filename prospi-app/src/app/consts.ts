@@ -45,7 +45,24 @@ export class Consts{
     public static readonly BATTER_ALT1 = 'batter_alt1';
     public static readonly BATTER_ALT2 = 'batter_alt2';
 
+    public static readonly POSITION_STARTER = '先';
+    public static readonly POSITION_SETUPPER = '継';
+    public static readonly POSITION_CLOSER = '抑';
+    public static readonly POSITION_CATCHER = '捕';
+    public static readonly POSITION_FIRST = '一';
+    public static readonly POSITION_SECOND = '二';
+    public static readonly POSITION_THIRD = '三';
+    public static readonly POSITION_SHORT = '遊';
+    public static readonly POSITION_LEFT = '左';
+    public static readonly POSITION_CENTER = '中';
+    public static readonly POSITION_RIGHT = '右';
+
     public static readonly targetLevel: string[] = ['S', 'A', 'B', 'C', 'D'];
+    public static readonly RANK_S = 'S';
+    public static readonly RANK_A = 'A';
+    public static readonly RANK_B = 'B';
+    public static readonly RANK_C = 'C';
+    public static readonly RANK_D = 'D';
 
     public static readonly targetTeam: string[] = [Consts.HAWKS, Consts.LIONS, Consts.MARINS, Consts.BUFFALOWS, Consts.RAKUTEN, Consts.FIGHTERS, Consts.GIANTS,
      Consts.BAYSTERS, Consts.TIGERS, Consts.CARP, Consts.DRAGONS, Consts.SWALLOWS];

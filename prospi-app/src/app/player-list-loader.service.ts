@@ -26,11 +26,13 @@ export class PlayerListLoaderService {
     loadPitcherCandidateList(): Observable<any> {
 
         if(this.pitcherArray.length != 0){
+            console.log('AAAA');
             return new Observable((observable)=> {
                 observable.next(this.pitcherArray);
                 observable.complete();
             });
         } else {
+            console.log('BBBB');
             return new Observable((observable) => {
                 this.http.get('assets/pitcher.csv', {responseType: 'text'})
                 .subscribe(

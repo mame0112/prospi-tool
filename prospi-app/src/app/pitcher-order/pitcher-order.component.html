@@ -1,4 +1,7 @@
 <div fxLayout="column">
+    <div fxFlex>
+        <button mat-raised-button color="primary" (click)="calcCombo()">コンボ計算</button>
+    </div>
     <div fxFlex fxLayout="row" fxLayoutAlign="center start" *ngFor="let h of holder">
         <div fxFlex="10%" fxLayout="column" fxFlexFill fxFlexAlign="center">
             <div fxFlex fxFlexFill>
