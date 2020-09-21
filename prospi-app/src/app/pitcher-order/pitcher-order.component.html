@@ -96,6 +96,14 @@
                         -
                     </div>
                 </div>
+                <div fxFlex fxLayout="column" fxLayoutAlign="start center">
+                    <div fxFlex>
+                        ランク
+                    </div>
+                    <div fxFlex>
+                        {{h.value.rank}}
+                    </div>
+                </div>
             </div>
         </div>
         <div fxFlex="40%" fxLayout="column" class="item_title_additional">
@@ -251,6 +259,14 @@
                     </div>
                     <div fxFlex *ngIf="h.value == null">
                         -
+                    </div>
+                </div>
+                <div fxFlex fxLayout="column" fxLayoutAlign="start center">
+                    <div fxFlex>
+                        ランク
+                    </div>
+                    <div fxFlex>
+                        {{h.value.rank}}
                     </div>
                 </div>
             </div>

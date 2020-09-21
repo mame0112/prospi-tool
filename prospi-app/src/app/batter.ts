@@ -30,10 +30,11 @@ export class Batter implements Player{
     center: string;
     right: string;
     title: any;
+    rank: string;
 
     constructor(id: string, uuid: string, team: string, position: string, name: string, series: string, 
         meet: string, power: string, speed: string, majorTotal: string, catching: string, throwAccuracy: string, throwPower: string, minorTotal: string, total: string,
-         spirits: string, allPoint: string, bat: string, cost: string, ballistic: string, catcher: string, first: string, second: string, third: string, short: string, left: string, center: string, right: string){
+         spirits: string, allPoint: string, bat: string, cost: string, ballistic: string, catcher: string, first: string, second: string, third: string, short: string, left: string, center: string, right: string, rank: string){
         // super(id, uuid, team, position, name, series, 
         // meet, power, speed, majorTotal, catching, throwAccuracy, throwPower, minorTotal, total,
         //  spirits, allPoint, bat, cost, ballistic, catcher, first, second, third, short, left, center, right);
@@ -66,6 +67,7 @@ export class Batter implements Player{
         this.left = left;
         this.center = center;
         this.right = right;
+        this.rank = rank;
 
     }
 

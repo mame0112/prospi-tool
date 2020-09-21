@@ -41,7 +41,7 @@ export class PlayerListLoaderService {
                         for (let index = 1; index < csvToRowArray.length - 1; index++) {
                           let row = csvToRowArray[index].split(",");
                           // console.log(row[0]);
-                          this.pitcherArray.push(new Pitcher(Util.createId(row[0]), new UuidUtil().createUuid(row[0], row[2], row[3]), row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18], row[19], row[20]));
+                          this.pitcherArray.push(new Pitcher(Util.createId(row[0]), new UuidUtil().createUuid(row[0], row[2], row[3]), row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18], row[19], row[20], 'S'));
                         }
                         console.log(this.pitcherArray);
                         observable.next(this.pitcherArray);
@@ -71,7 +71,7 @@ export class PlayerListLoaderService {
                     let csvToRowArray = data.split("\n");
                     for (let index = 1; index < csvToRowArray.length - 1; index++) {
                       let row = csvToRowArray[index].split(",");
-                      this.batterArray.push(new Batter(Util.createId(row[0]), new UuidUtil().createUuid(row[0], row[2], row[3]), row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18], row[19], row[20], row[21], row[22], row[23], row[24], row[25]));
+                      this.batterArray.push(new Batter(Util.createId(row[0]), new UuidUtil().createUuid(row[0], row[2], row[3]), row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18], row[19], row[20], row[21], row[22], row[23], row[24], row[25], 'S'));
                     }
                     observable.next(this.batterArray);
                     observable.complete();

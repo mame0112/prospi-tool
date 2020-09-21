@@ -25,8 +25,9 @@ export class Pitcher implements Player{
     setupper: string;
     closer: string;
     title: any;
+    rank: any;
 
-    constructor(id: string, uuid: string, team: string, position: string, name: string, series: string, speed: string, control: string, stamina: string, majorTotal: string, catching: string, throwAccuracy: string, throwPower: string, minorTotal: string, total: string, spirits: string, allPoint: string, bat: string, cost: string, breakingBall: string, starter: string, setupper: string, closer: string){
+    constructor(id: string, uuid: string, team: string, position: string, name: string, series: string, speed: string, control: string, stamina: string, majorTotal: string, catching: string, throwAccuracy: string, throwPower: string, minorTotal: string, total: string, spirits: string, allPoint: string, bat: string, cost: string, breakingBall: string, starter: string, setupper: string, closer: string, rank: string){
         this.id = id;
         this.uuid = uuid;
         this.team = team;
@@ -50,6 +51,7 @@ export class Pitcher implements Player{
         this.starter = starter;
         this.setupper = setupper
         this.closer = closer
+        this.rank = rank;
 
     }
 

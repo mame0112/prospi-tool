@@ -62,7 +62,7 @@ export class CandidateComponent implements OnInit {
                     for (let index = 1; index < csvToRowArray.length - 1; index++) {
                       let row = csvToRowArray[index].split(",");
                       // console.log(row[0]);
-                      this.pitcherArray.push(new Pitcher(this.createId(row[0]), new UuidUtil().createUuid(row[0], row[2], row[3]), row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18], row[19], row[20]));
+                      this.pitcherArray.push(new Pitcher(this.createId(row[0]), new UuidUtil().createUuid(row[0], row[2], row[3]), row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18], row[19], row[20], 'S'));
                     }
                   // this.targetPithers = this.pitcherArray
                   this.targetPithers = JSON.parse(JSON.stringify(this.pitcherArray));
@@ -81,7 +81,7 @@ export class CandidateComponent implements OnInit {
                     for (let index = 1; index < csvToRowArray.length - 1; index++) {
                       let row = csvToRowArray[index].split(",");
                       console.log(row);
-                      this.batterArray.push(new Batter(this.createId(row[0]), new UuidUtil().createUuid(row[0], row[2], row[3]), row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18], row[19], row[20], row[21], row[22], row[23], row[24], row[25]));
+                      this.batterArray.push(new Batter(this.createId(row[0]), new UuidUtil().createUuid(row[0], row[2], row[3]), row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18], row[19], row[20], row[21], row[22], row[23], row[24], row[25], 'S'));
                     }
                   this.targetBatters = JSON.parse(JSON.stringify(this.batterArray));
                   this.listItem.push(this.targetBatters);
@@ -303,7 +303,11 @@ export class CandidateComponent implements OnInit {
         console.log('selectPlayer');
         console.log(player);
 
-        this.storeDataToHolderService(this.targetPosition, player);
+        if (player != null){
+            this.storeDataToHolderService(this.targetPosition, player);
+        }
+
+
 
         this.router.navigate(['/order']);
 
